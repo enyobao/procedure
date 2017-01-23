@@ -22,6 +22,11 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+  <!--<view class="icon-search"></view>
+  <view class="icon-thumbs-up2"></view>
+  <view class="icon-thumbs-down2"></view>
+  <view class="icon-star"></view>
+  <view class="icon-smile-o"></view>-->
 </view>
 <template name="tabTmpl">
   <view class="tab-city">{{city}}</view>
