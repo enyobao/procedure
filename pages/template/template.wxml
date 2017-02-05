@@ -1,0 +1,12 @@
+<template name="tabTmpl">
+  <view class="tab-city">{{city}}</view>
+</template>
+
+<template name="detailsTmp">
+  <view class="details-list">
+    <image class="image" src="{{item.imgsrc}}"></image>
+    <view class="title">{{item.title}}({{item.days}})</view>
+    <view class="date-departure">{{item.date}} {{item.departure}}</view>
+    <view class="price">{{item.price}}</view>
+  </view>
+</template>

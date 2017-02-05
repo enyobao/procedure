@@ -15,6 +15,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.container{
+  position: relative;
+  width:750rpx;
+  height: 100%;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -34,31 +39,112 @@
 .usermotto {
   margin-top: 200px;
 }
+.header{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width:750rpx;
+  height: 70rpx;
+  z-index: 5;
+}
 .logo{
+  width:250rpx;
   padding-left:20rpx;
   height: 80rpx;
   line-height: 80rpx;
-  /*background: #f00;*/
-  color:#fff;
+  float: left;
+  color:#f00;
+  font-weight: bold;
 }
-.header{
+.search-con{
   position: relative;
-  height: 70rpx;
+  margin-top: 10rpx;
+  width:460rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background: rgba(255,255,255,0.6);
+  float: left;
 }
-.position{
+.search-con .icon-search{
   position: absolute;
+  right:0;
   top: 0;
-  left: 0;
+  height: 60rpx;
+  width: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  /*border: 2rpx solid #000;*/
 }
-.screen{
+.search-con .input{
+  padding: 0 10rpx;
+  width:380rpx;
+  height: 60rpx;
+}
+
+.slide-image{
+  width:750rpx;
+}
+.menu{
+  width:700rpx;
+  padding: 25rpx;
+}
+.option-menu{
+  width:120rpx;
+  height:120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  border-radius: 50%;
+  margin: 10rpx;
+  background: lawngreen;
+  float: left;
+}
+.details{
+  width:750rpx;
+  color: #666;
+}
+.details-list{
+  width:670rpx;
+  padding: 30rpx 40rpx;
+  position: relative;
+  border-bottom: 2rpx solid #eee;
+}
+.details-list .image{
+  width:300rpx;
+  height: 200rpx;
+  position: relative;
+}
+.details-list .title{
   position: absolute;
-  right: 0;
-  top: 0;
+  left:380rpx;
+  top:30rpx;
+  width:300rpx;
+  font-weight: bold;
+}
+.details-list .date-departure{
+  position: absolute;
+  left:380rpx;
+  top:150rpx;
+}
+.details-list .price{
+  position: absolute;
+  left: 380rpx;
+  top: 200rpx;
+  color: #f00;
+}
+
+
+.position,.screen{
+  width: 50%;
+  height: 50rpx;
+  line-height: 50rpx;
+  float: left;
+  color: #666;
+  text-align: center;
+  border-bottom: 2rpx solid #eee;
 }
 .nav-container{
-  position: absolute;
-  left:750rpx;
-  top:0;
+  position: relative;
+  color: #333;
 }
 .navlist{
   float: left;
