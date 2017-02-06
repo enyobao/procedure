@@ -84,20 +84,6 @@
 .slide-image{
   width:750rpx;
 }
-.menu{
-  width:700rpx;
-  padding: 25rpx;
-}
-.option-menu{
-  width:120rpx;
-  height:120rpx;
-  line-height: 120rpx;
-  text-align: center;
-  border-radius: 50%;
-  margin: 10rpx;
-  background: lawngreen;
-  float: left;
-}
 .details{
   width:750rpx;
   color: #666;
@@ -144,13 +130,15 @@
 }
 .nav-container{
   position: relative;
-  color: #333;
+  color: #666;
+  height: 50rpx;
 }
 .navlist{
+  position: relative;
   float: left;
   width:375rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   box-sizing: border-box;
   text-align:center;
   border-bottom: 2rpx solid #eee;
@@ -165,12 +153,40 @@
   overflow: hidden;
 }
 .nav-city-con , .nav-theme-con{
-  height: 100%;
   display: none;
 }
 .nav .on{
   background:#ccc;
 }
 .nav-list-box .on{
+  width: 100%;
   display: block;
+  background: #fff;
+  border-bottom: 2rpx solid #eee;
+  position: absolute;
+  left: 0;
+  top: 50rpx;
+  z-index: 2;
+  padding-bottom: 93rpx;
+}
+.menu{
+  width:700rpx;
+  padding: 25rpx;
+}
+.option-menu{
+  width:120rpx;
+  height:50rpx;
+  border: 2rpx solid #eee;
+  line-height: 50rpx;
+  text-align: center;
+  margin: 9rpx;
+  float: left;
+}
+.choose-button{
+  position: absolute;
+  right: 34rpx;
+  bottom: 25rpx;
+}
+.reset{
+  margin-right: 25rpx;
 }

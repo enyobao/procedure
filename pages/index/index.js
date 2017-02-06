@@ -5,6 +5,17 @@ Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
+    city:[
+      {city:"北京"},
+      {city:"上海"},
+      {city:"广州"},
+      {city:"深圳"},
+      {city:"厦门"},
+      {city:"青岛"},
+      {city:"西安"},
+      {city:"成都"},
+      {city:"重庆"}
+    ],
     details:[
       {
         title:"色彩云南 色彩云南 色彩云南 色彩云南",

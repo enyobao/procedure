@@ -18,39 +18,50 @@
       </block>
     </swiper>
   </view>
-  <view class=" clearfix">
-    <view class="position">热门城市</view>
-    <view class="screen">种类</view> 
+  <view class="nav-container">
+      <view class="nav">
+        <view class="navlist border-right {{currentTab == 1 ? 'on' : ''}}" data-current='1' bindtap="switchNav">热门城市</view>
+        <view class="navlist {{currentTab == 2 ? 'on' : ''}}" data-current="2" bindtap="switchNav">种类</view>
+      </view>
+      <view class="nav-list-box" current="{{currentTab}}" bindchange="bindChange">
+        <view class="nav-city-con {{currentTab == 1 ? 'on' : ''}}">
+            <view class="menu clearfix">
+                <block wx:for="{{city}}">
+                    <template is="city" data="{{item}}"/> 
+                </block>
+            </view>
+            <view class="choose-button">
+                <button type="primary" formType="submit" size="mini" class="reset">重置</button>
+                <button type="primary" formType="submit" size="mini" class="submit">确认</button>
+            </view>
+        </view>
+        <view class="nav-theme-con {{currentTab == 2 ? 'on' : ''}}">
+            <view class="menu clearfix"> 
+                <view class="option-menu">徒步</view>
+                <view class="option-menu">摄影</view>
+                <view class="option-menu">登山</view>
+                <view class="option-menu">骑行</view>
+                <view class="option-menu">跑步</view>
+                <view class="option-menu">赛事</view>
+                <view class="option-menu">俱乐部</view>
+                <view class="option-menu">结伴</view>
+                <view class="option-menu">AA</view>
+                <view class="option-menu">全部</view>
+            </view> 
+            <view class="choose-button">
+                <button type="primary" formType="submit" size="mini" class="reset">重置</button>
+                <button type="primary" formType="submit" size="mini" class="submit">确认</button>
+            </view>   
+        </view>
+      </view>
   </view>
-  <!--<view class="menu">
-    <view class="option-menu menu-tubu">徒步</view>
-    <view class="option-menu menu-tubu">摄影</view>
-    <view class="option-menu menu-tubu">登山</view>
-    <view class="option-menu menu-tubu">骑行</view>
-    <view class="option-menu menu-tubu">跑步</view>
-    <view class="option-menu menu-tubu">赛事</view>
-    <view class="option-menu menu-tubu">俱乐部</view>
-    <view class="option-menu menu-tubu">结伴</view>
-    <view class="option-menu menu-tubu">AA</view>
-    <view class="option-menu menu-tubu">全部</view>
-  </view>-->
-
   <view class="details">
     <block wx:for="{{details}}">
       <template is="detailsTmp" data="{{item}}"/>
     </block>
   </view>
-
-  <view class="nav-container">
-      <view class="nav">
-        <view class="navlist border-right {{currentTab == 0 ? 'on' : ''}}" data-current='0' bindtap="switchNav">城市</view>
-        <view class="navlist {{currentTab == 1 ? 'on' : ''}}" data-current="1" bindtap="switchNav">主题</view>
-      </view>
-      <view class="nav-list-box" current="{{currentTab}}" bindchange="bindChange">
-        <view class="nav-city-con {{currentTab == 0 ? 'on' : ''}}">我是城市</view>
-        <view class="nav-theme-con {{currentTab == 1 ? 'on' : ''}}">我是主题</view>
-      </view>
-    </view>
+  
+  
   <!--<view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>

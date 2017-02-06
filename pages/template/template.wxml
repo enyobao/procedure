@@ -10,3 +10,6 @@
     <view class="price">{{item.price}}</view>
   </view>
 </template>
+<template name="city">
+    <view class="option-menu">{{item.city}}</view>
+</template>
