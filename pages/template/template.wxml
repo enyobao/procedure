@@ -3,7 +3,7 @@
 </template>
 
 <template name="detailsTmp">
-  <view class="details-list">
+  <view class="details-list" bindtap="getDetails" id="{{index}}">
     <image class="image" src="{{item.imgsrc}}"></image>
     <view class="title">{{item.title}}({{item.days}})</view>
     <view class="date-departure">{{item.date}} {{item.departure}}</view>
@@ -12,4 +12,10 @@
 </template>
 <template name="city">
     <view class="option-menu">{{item.city}}</view>
+</template>
+<template name="detailsConTmp">
+    <view class="nav-list">
+        <view class="nav-show" bindtap="clickToDetails" id="{{index+1}}">{{item.name}}</view>
+        <view class="nav-details-show {{currentId == index+1 ? 'on' : ''}}">{{item.detail}}</view>
+    </view>
 </template>

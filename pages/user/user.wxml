@@ -1,0 +1,14 @@
+<view class="container">
+    <view class="user-details white-bac">
+        <view  bindtap="bindViewTap" class="userinfo">
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </view>
+        <!--<view class="usermotto">
+            <text class="user-motto">{{motto}}</text>
+        </view>-->
+    </view>
+    <view class="white-bac">
+        <view>我的订单</view>
+    </view>
+</view>

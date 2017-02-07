@@ -3,8 +3,6 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
     city:[
       {city:"北京"},
       {city:"上海"},
@@ -66,12 +64,6 @@ Page({
     duration:1000,
     currentTab: 0
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function () {
     console.log('onLoad')
     var that = this
@@ -83,18 +75,35 @@ Page({
       })
     })
   },
-    //滑动tab 切换
-    bindChange:function(e){
-      var that = this;
-      that.setData({currentTab:e.detail.current});
-    },
-    //点击tab切换
-    switchNav:function(e){
-      var that = this;
-      if(this.data.currentTab === e.target.dataset.current){
-        return false;
-      }else{
-        that.setData({currentTab:e.target.dataset.current});
-      }
+  //滑动tab 切换
+  bindChange:function(e){
+    var that = this;
+    that.setData({currentTab:e.detail.current});
+  },
+  //点击tab切换
+  switchNav:function(e){
+    var that = this;
+    if(this.data.currentTab === e.target.dataset.current){
+      return false;
+    }else{
+      that.setData({currentTab:e.target.dataset.current});
     }
+  },
+  //跳转到详情页
+  getDetails:function(event){
+    var id = event.currentTarget.id;
+    console.log(id);
+    wx.navigateTo({
+      url: '/pages/details/details?id='+id,
+      success: function(res){
+        // success
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
+  }
 })

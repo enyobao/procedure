@@ -9,5 +9,5 @@
   box-sizing: border-box;
   font-size: 30rpx;
   color: #fff;
-  background-color: #fff;
+  background-color: #eee;
 } 

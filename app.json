@@ -1,7 +1,9 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/user/user",
+    "pages/details/details"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -11,22 +13,17 @@
   },
   "tabBar": {  
    "color": "#a9b7b7",  
-   "selectedColor": "#11cd6e",  
+   "selectedColor": "#00e870",  
    "borderStyle":"white",  
    "list": [{  
-     "selectedIconPath": "images/111.png",  
-     "iconPath": "images/11.png",  
+     "selectedIconPath": "pages/img/shouye-selected.png",  
+     "iconPath": "pages/img/shouye.png",  
      "pagePath": "pages/index/index",  
      "text": "首页"  
-   }, {  
-     "selectedIconPath": "images/221.png",  
-     "iconPath": "images/22.png",  
-     "pagePath": "pages/logs/logs",  
-     "text": "日志"  
-   }, {  
-     "selectedIconPath": "images/331.png",  
-     "iconPath": "images/33.png",  
-     "pagePath": "pages/test/test",  
+   },{  
+     "selectedIconPath": "pages/img/user-selected.png",  
+     "iconPath": "pages/img/user.png",  
+     "pagePath": "pages/user/user",  
      "text": "个人中心"  
    }]  
  }

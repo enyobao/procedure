@@ -10,7 +10,7 @@
   </view>
   <view class="slide-con">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
-      <block wx:for="{{imgUrls}}">
+      <block wx:for="{{imgUrls}}" wx:key="property">
           <swiper-item>
               <navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>
               <image src="{{item.url}}" class="slide-image"></image>
@@ -26,7 +26,7 @@
       <view class="nav-list-box" current="{{currentTab}}" bindchange="bindChange">
         <view class="nav-city-con {{currentTab == 1 ? 'on' : ''}}">
             <view class="menu clearfix">
-                <block wx:for="{{city}}">
+                <block wx:for="{{city}}" wx:key="property">
                     <template is="city" data="{{item}}"/> 
                 </block>
             </view>
@@ -56,18 +56,9 @@
       </view>
   </view>
   <view class="details">
-    <block wx:for="{{details}}">
-      <template is="detailsTmp" data="{{item}}"/>
+    <block wx:for="{{details}}" wx:key="property">
+      <template is="detailsTmp" data="{{item,index}}"/>
     </block>
   </view>
-  
-  
-  <!--<view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>-->
-  <!--<view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>-->
 </view>
 

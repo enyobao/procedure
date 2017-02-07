@@ -1,0 +1,15 @@
+<import src="../template/template.wxml"/>
+<view class="container">
+    <view class="header">
+        <image src="../img/car.jpeg" class="img"></image>
+        <view class="title">主题名称</view>
+        <view class="days">x年月日-年月日</view>
+        <view class="price">价格</view>
+    </view>  
+    <button class="join-in" type="primary" size="mini">我要报名</button>  
+    <view class="nav">
+        <block wx:for="{{details}}" wx:key="property">
+            <template is="detailsConTmp" data="{{item,index,currentId}}"/> 
+        </block>
+    </view>
+</view>
