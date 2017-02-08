@@ -11,11 +11,14 @@
   </view>
 </template>
 <template name="city">
-    <view class="option-menu">{{item.city}}</view>
+    <view class="option-menu">{{item.name}}</view>
 </template>
 <template name="detailsConTmp">
     <view class="nav-list">
         <view class="nav-show" bindtap="clickToDetails" id="{{index+1}}">{{item.name}}</view>
         <view class="nav-details-show {{currentId == index+1 ? 'on' : ''}}">{{item.detail}}</view>
     </view>
+</template>
+<template name="sex">
+  <radio class="radio" checked="false" value="{{item.value}}">{{item.sex}}</radio>
 </template>

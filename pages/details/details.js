@@ -24,10 +24,37 @@ Page({
         "detail":"详细描述概述报名须知详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息"
       },
     ],
-    currentId:0
+    imgUrls:[
+      {
+        link:"",
+        url:"../img/dengshan.jpeg"
+      },
+      {
+        link:"",
+        url:"../img/run2.jpeg"
+      },
+      {
+        link:"",
+        url:"../img/bike.jpeg"
+      },
+      {
+        link:"",
+        url:"../img/hike.jpeg"
+      }
+    ],
+    indicatorDots:true,
+    autoplay:true,
+    interval:5000,
+    duration:1000,
+    currentId:0,
+    detailsId:0
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    console.log(JSON.stringify(options));
+    var that = this;
+    var id = options.id;
+    that.setData({detailsId:id});
   },
   onReady:function(){
     // 页面渲染完成
@@ -41,9 +68,27 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
+  //了解详情
   clickToDetails:function(event){
       var id = event.currentTarget.id;
       var that = this;
       that.setData({currentId:id});
+  },
+  //报名
+  joinInEvent:function(event){
+     var that = this;
+     var id = event.currentTarget.id;
+      wx.navigateTo({
+        url: '/pages/trade/trade?id='+that.data.detailsId,
+        success: function(res){
+          // success
+        },
+        fail: function() {
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      }) 
   }
 })

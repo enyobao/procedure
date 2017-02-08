@@ -1,13 +1,13 @@
 <!--index.wxml-->
 <import src="../template/template.wxml"/>
-<view class="container">
-  <view class="header clearfix">
+<view class="header clearfix {{scroll == 1?'on':''}}">
     <view class="logo">Logo</view>
     <view class='search-con'>
         <input class="input" type="text" placeholder="北京"/>
         <view class="icon-search"></view>     
     </view>  
-  </view>
+</view>
+<scroll-view class="container" scroll-y="true" bindscroll="changeHeader">
   <view class="slide-con">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
       <block wx:for="{{imgUrls}}" wx:key="property">
@@ -36,18 +36,11 @@
             </view>
         </view>
         <view class="nav-theme-con {{currentTab == 2 ? 'on' : ''}}">
-            <view class="menu clearfix"> 
-                <view class="option-menu">徒步</view>
-                <view class="option-menu">摄影</view>
-                <view class="option-menu">登山</view>
-                <view class="option-menu">骑行</view>
-                <view class="option-menu">跑步</view>
-                <view class="option-menu">赛事</view>
-                <view class="option-menu">俱乐部</view>
-                <view class="option-menu">结伴</view>
-                <view class="option-menu">AA</view>
-                <view class="option-menu">全部</view>
-            </view> 
+            <view class="menu clearfix">
+                <block wx:for="{{theme}}" wx:key="property">
+                    <template is="city" data="{{item}}"/> 
+                </block>
+            </view>
             <view class="choose-button">
                 <button type="primary" formType="submit" size="mini" class="reset">重置</button>
                 <button type="primary" formType="submit" size="mini" class="submit">确认</button>
@@ -60,5 +53,5 @@
       <template is="detailsTmp" data="{{item,index}}"/>
     </block>
   </view>
-</view>
+</scroll-view>
 

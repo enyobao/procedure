@@ -1,0 +1,49 @@
+<import src="../template/template.wxml"/>
+<view class="container">
+    <view class="header">
+        <view class="title">主题：</view>
+        <view class="price">价格</view>
+        <view class="date">2016-01-01 2016-01-06</view>
+    </view>
+    <form bindsubmit="formSubmit">
+        <view class="nav">
+            <view class="nav-list">
+                <view class="nav-title">费用信息</view>
+                <view class="trade-details">
+                    <view>
+                        <view>报名人数:</view>
+                        <input value="2" name="num"/>
+                    </view>
+                </view>
+            </view>
+            <view class="nav-list">
+                <view class="nav-title">报名信息</view>
+                <view class="tourist-details">
+                    <view class="clearfix">
+                        <label class="fl">用户名：</label><input class="text-right fr" name="userName" type="text" value="anbsdff"/>
+                    </view>
+                    <view class="clearfix">
+                        <label class="fl">联系方式：</label><input class="text-right fr" name="phone" type="number" value="18810112022"/>
+                    </view>
+                    <view class="clearfix">
+                        <label class="fl">性别：</label>
+                        <radio-group bindchange="radioChecked" name="sex" class="text-right fr">
+                            <block wx:for="{{sex}}" wx:key="property">
+                                <template is="sex" data="{{item}}"/>
+                            </block>
+                        </radio-group>
+                    </view>
+                    <view class="clearfix">
+                        <label class="fl">备注：</label>
+                    </view>
+                    <view>
+                        <textarea class="textarea" name="mark" placeholder="想对我们说什么，就在这里写下来吧~"/>
+                    </view>
+                </view>
+            </view>
+        </view>        
+        <view class="bottom">
+            <button class="join-in" type="primary" formType="submit">确定报名</button>
+        </view>
+    </form>    
+</view>    
