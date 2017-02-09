@@ -1,3 +1,4 @@
+<import src="../template/template.wxml"/>
 <view class="container">
     <view class="user-details white-bac">
         <view  bindtap="bindViewTap" class="userinfo">
@@ -10,5 +11,10 @@
     </view>
     <view class="white-bac">
         <view>我的订单</view>
+    </view>
+    <view class="details white-bac">
+        <block wx:for="{{details}}" wx:key="property">
+            <template is="userTmp" data="{{item,index}}"/>
+        </block>
     </view>
 </view>

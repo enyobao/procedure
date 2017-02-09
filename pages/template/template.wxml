@@ -10,15 +10,29 @@
     <view class="price">{{item.price}}</view>
   </view>
 </template>
-<template name="city">
-    <view class="option-menu">{{item.name}}</view>
+
+<template name="userTmp">
+  <view class="details-list" bindtap="getDetails" id="{{index}}">
+    <image class="image" src="{{item.headImg}}"></image>
+    <view class="title">{{item.campTitle}}</view>
+    <view class="date-departure">{{item.createTime}} {{item.departure}}</view>
+    <view class="price">{{item.amount}}</view>
+    <view class="status">{{item.statusMark}}</view>
+    <view class="more">订单详情</view>
+  </view>
 </template>
+
+<template name="city">
+    <checkbox class="option-menu" value="{{item.name}}" checked="{{!checkBoxChecked?'':'true'}}">{{item.name}}</checkbox>
+</template>
+
 <template name="detailsConTmp">
     <view class="nav-list">
         <view class="nav-show" bindtap="clickToDetails" id="{{index+1}}">{{item.name}}</view>
         <view class="nav-details-show {{currentId == index+1 ? 'on' : ''}}">{{item.detail}}</view>
     </view>
 </template>
+
 <template name="sex">
   <radio class="radio" checked="false" value="{{item.value}}">{{item.sex}}</radio>
 </template>

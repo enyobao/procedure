@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp()
+var sha1=require('../../utils/sha1.js');
 Page({
   data: {
     city:[
@@ -90,11 +91,30 @@ Page({
     interval:5000,
     duration:1000,
     currentTab: 0,
-    scroll:0
+    currentShow:0,
+    scroll:0,
+    currentSelectedCity:0,
+    checkBoxDetails:[],
+    checkBoxChecked:false
   },
   onLoad: function () {
-    console.log('onLoad')
+    console.log('onLoad');
+    var aesStr = sha1.hex_sha1("{a:1,b:2}wangguowei");
+    console.log("aesStr"+aesStr);
     var that = this
+    wx.request({
+      url: 'https://114.215.134.69/api/campaign/list?locationName&campType&keyword&page&aesStr='+aesStr, //仅为示例，并非真实的接口地址
+      method:'POST',
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        console.log(JSON.stringify(res));
+      },
+      fail:function(res){
+        console.log(JSON.stringify(res));
+      }
+    })
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
@@ -106,15 +126,22 @@ Page({
   //滑动tab 切换
   bindChange:function(e){
     var that = this;
-    that.setData({currentTab:e.detail.current});
+    that.setData({currentShow:e.detail.current});
   },
-  //点击tab切换
+  //点击tab
   switchNav:function(e){
     var that = this;
-    if(this.data.currentTab === e.target.dataset.current){
+    var current = e.target.dataset.current;
+    if(this.data.currentTab === current){
       return false;
     }else{
-      that.setData({currentTab:e.target.dataset.current});
+      that.setData({currentTab:current,currentShow:current});
+    }
+
+    if(current == 0){
+      var e={detail:{value:[]}};
+      that.checkBoxChange(e);
+      that.cityReset();
     }
   },
   //跳转到详情页
@@ -138,11 +165,37 @@ Page({
   changeHeader:function(event){
     var that = this;
     var scrollTop = event.detail.scrollTop;
-    console.log(JSON.stringify("scrollTop"+scrollTop));
     if(scrollTop > 10){
       that.setData({scroll:1});
     }else{
       that.setData({scroll:0});
     }
+  },
+  //热门城市，种类-复选框
+  checkBoxChange:function(e){
+    var that = this;
+    var num = e.detail.value;
+    that.setData({checkBoxDetails:num});
+  },
+  //确认筛选
+  citySelected:function(event){
+    var that =this;
+    var checkedData = that.data.checkBoxDetails;
+    
+    console.log("checkedData"+JSON.stringify(checkedData));
+    that.setData({currentShow:0});
+  },
+  //重置
+  cityReset:function(){
+    var that = this;
+    that.setData({checkBoxChecked:false});
+  },
+  //搜索
+  searchFun:function(e){
+    console.log("search:"+e.detail.value);
+  },
+  searchBtnFun:function(){
+    var search_content = document.getElementById('search_value').value; 
+    console.log("search:"+search_content);
   }
 })

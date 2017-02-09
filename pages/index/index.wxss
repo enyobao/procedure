@@ -1,5 +1,5 @@
 /**index.wxss**/
-@import "style.wxss";
+/*@import "style.wxss";*/
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
@@ -57,15 +57,13 @@
 }
 .search-con .icon-search{
   position: absolute;
-  right:0;
-  top: 0;
-  height: 60rpx;
-  width: 60rpx;
-  line-height: 60rpx;
-  text-align: center;
-  /*border: 2rpx solid #000;*/
+  left:10rpx;
+  top: 10rpx;
 }
 .search-con .input{
+  position: absolute;
+  right:0;
+  top: 0;
   padding: 0 10rpx;
   width:380rpx;
   height: 60rpx;
@@ -126,7 +124,7 @@
 .navlist{
   position: relative;
   float: left;
-  width:375rpx;
+  width:250rpx;
   height: 50rpx;
   line-height: 50rpx;
   box-sizing: border-box;
@@ -146,7 +144,7 @@
   display: none;
 }
 .nav .on{
-  background:#ccc;
+  color: #00e870;
 }
 .nav-list-box .on{
   width: 100%;
@@ -166,11 +164,13 @@
 .option-menu{
   width:120rpx;
   height:50rpx;
-  border: 2rpx solid #eee;
   line-height: 50rpx;
   text-align: center;
-  margin: 9rpx;
+  margin: 10rpx;
   float: left;
+}
+option-menu.on{
+  background: #00e870;
 }
 .choose-button{
   position: absolute;

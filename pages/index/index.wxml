@@ -3,8 +3,8 @@
 <view class="header clearfix {{scroll == 1?'on':''}}">
     <view class="logo">Logo</view>
     <view class='search-con'>
-        <input class="input" type="text" placeholder="北京"/>
-        <view class="icon-search"></view>     
+        <input class="input" id="search_value" type="text" placeholder="北京" bindconfirm="searchFun"/>
+        <icon type="search" class="icon-search" size="20" color="#fff" bindtap="searchBtnFun"></icon>
     </view>  
 </view>
 <scroll-view class="container" scroll-y="true" bindscroll="changeHeader">
@@ -20,30 +20,31 @@
   </view>
   <view class="nav-container">
       <view class="nav">
+        <view class="navlist border-right {{currentTab == 0 ? 'on' : ''}}" data-current='0' bindtap="switchNav">全部</view>
         <view class="navlist border-right {{currentTab == 1 ? 'on' : ''}}" data-current='1' bindtap="switchNav">热门城市</view>
         <view class="navlist {{currentTab == 2 ? 'on' : ''}}" data-current="2" bindtap="switchNav">种类</view>
       </view>
-      <view class="nav-list-box" current="{{currentTab}}" bindchange="bindChange">
-        <view class="nav-city-con {{currentTab == 1 ? 'on' : ''}}">
-            <view class="menu clearfix">
+      <view class="nav-list-box" current="{{currentShow}}" bindchange="bindChange">
+        <view class="nav-city-con {{currentShow == 1 ? 'on' : ''}}">
+            <checkbox-group class="menu clearfix" bindchange="checkBoxChange">
                 <block wx:for="{{city}}" wx:key="property">
-                    <template is="city" data="{{item}}"/> 
+                    <template is="city" data="{{item,index,checkBoxChecked}}"/> 
                 </block>
-            </view>
+            </checkbox-group>
             <view class="choose-button">
-                <button type="primary" formType="submit" size="mini" class="reset">重置</button>
-                <button type="primary" formType="submit" size="mini" class="submit">确认</button>
+                <button type="primary" formType="submit" size="mini" class="reset" bindtap="cityReset">重置</button>
+                <button type="primary" formType="submit" size="mini" class="submit" bindtap="citySelected">确认</button>
             </view>
         </view>
-        <view class="nav-theme-con {{currentTab == 2 ? 'on' : ''}}">
-            <view class="menu clearfix">
+        <view class="nav-theme-con {{currentShow == 2 ? 'on' : ''}}">
+            <checkbox-group class="menu clearfix" bindchange="checkBoxChange">
                 <block wx:for="{{theme}}" wx:key="property">
-                    <template is="city" data="{{item}}"/> 
+                    <template is="city" data="{{item,index,checkBoxChecked}}"/> 
                 </block>
-            </view>
+            </checkbox-group>
             <view class="choose-button">
-                <button type="primary" formType="submit" size="mini" class="reset">重置</button>
-                <button type="primary" formType="submit" size="mini" class="submit">确认</button>
+                <button type="primary" formType="submit" size="mini" class="reset" bindtap="cityReset">重置</button>
+                <button type="primary" formType="submit" size="mini" class="submit" bindtap="citySelected">确认</button>
             </view>   
         </view>
       </view>

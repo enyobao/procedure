@@ -3,7 +3,22 @@ var app = getApp();
 Page({
   data:{  
     motto: 'Hello World',
-    userInfo: {}
+    userInfo: {},
+    details:[
+      {
+        statusMark:'已完成',
+        campTitle:"色彩云南 色彩云南 色彩云南 色彩云南",
+        headImg:"../img/car.jpeg",
+        evaluateMark:'评价按钮字样',
+        mark:'留言',
+        createTime:'date',
+        phone:'12333445566',
+        campId:'活动ID',
+        userName:'anier',
+        amount:"总价格",
+        userId:'用户id'
+      }
+    ]
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
