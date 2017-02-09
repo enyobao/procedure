@@ -17,8 +17,23 @@ Page({
         userName:'anier',
         amount:"总价格",
         userId:'用户id'
+      },
+      {
+        statusMark:'已完成',
+        campTitle:"色彩云南 色彩云南 色彩云南 色彩云南",
+        headImg:"../img/car.jpeg",
+        evaluateMark:'评价按钮字样',
+        mark:'留言',
+        createTime:'date',
+        phone:'12333445566',
+        campId:'活动ID',
+        userName:'anier',
+        amount:"总价格",
+        userId:'用户id'
       }
-    ]
+    ],
+    currentIndex:0,
+    down:false
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -49,5 +64,10 @@ Page({
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+  showUserDetail:function(e){
+    var that = this;
+    var index = e.currentTarget.id+1;
+    that.setData({down:true,currentIndex:index});
   }
 })

@@ -12,13 +12,21 @@
 </template>
 
 <template name="userTmp">
-  <view class="details-list" bindtap="getDetails" id="{{index}}">
-    <image class="image" src="{{item.headImg}}"></image>
-    <view class="title">{{item.campTitle}}</view>
-    <view class="date-departure">{{item.createTime}} {{item.departure}}</view>
-    <view class="price">{{item.amount}}</view>
-    <view class="status">{{item.statusMark}}</view>
-    <view class="more">订单详情</view>
+  <view class="details-list" id="{{index}}">
+    <view class="details-top" id="{{index}}">
+        <image class="image" src="{{item.headImg}}"></image>
+        <view class="title">{{item.campTitle}}</view>
+        <view class="date-departure">{{item.createTime}} {{item.departure}}</view>
+        <view class="price">{{item.amount}}</view>
+        <view class="status">{{item.statusMark}}</view>
+        <view class="more" bindtap="showUserDetail" id="{{index}}">
+          <image src="../img/up.png" class="up-down {{down?'on':''}}"></image>
+          <image src="../img/down.png" class="up-down {{!down?'on':''}}"></image>
+        </view>
+    </view>
+    <view class="details-bottom {{down && (currentIndex == index+1)?'on':''}}">
+        sassjdfhsjf
+    </view>  
   </view>
 </template>
 

@@ -12,9 +12,9 @@
     <view class="white-bac">
         <view>我的订单</view>
     </view>
-    <view class="details white-bac">
+    <view class="details">
         <block wx:for="{{details}}" wx:key="property">
-            <template is="userTmp" data="{{item,index}}"/>
+            <template is="userTmp" data="{{item,index,currentIndex,down}}"/>
         </block>
     </view>
 </view>

@@ -27,14 +27,15 @@
   color: #333;
 }
 .details{
-  width:710rpx;
+  /*width:750rpx;*/
   color: #666;
 }
 .details-list{
-  width:670rpx;
-  padding: 30rpx 20rpx;
+  width:710rpx;
+  padding: 20rpx 20rpx;
+  margin-bottom:10rpx;
   position: relative;
-  border-bottom: 2rpx solid #eee;
+  background: #fff;
 }
 .details-list .image{
   width:300rpx;
@@ -43,31 +44,57 @@
 }
 .details-list .title{
   position: absolute;
-  left:380rpx;
-  top:30rpx;
+  left:340rpx;
+  top:10rpx;
   width:300rpx;
   font-weight: bold;
 }
-.details-list .date-departure{
-  position: absolute;
-  left:380rpx;
-  top:150rpx;
-}
 .details-list .price{
   position: absolute;
-  left: 380rpx;
-  top: 200rpx;
+  left: 340rpx;
+  top: 170rpx;
   color: #f00;
+}
+.details-list .date-departure{
+  position: absolute;
+  left:340rpx;
+  top:110rpx;
 }
 .details-list .status{
   position: absolute;
-  right: 0;
-  top: 20rpx;
+  right: -20rpx;
+  top: -20rpx;
   background: #ccc; 
 }
 .details-list .more{
+  width: 710rpx;
+  height: 60rpx;
   position: absolute;
-  right: 20rpx;
-  top: 200rpx;
-  color: #00bfff;
+  left: 0;
+  top: 220rpx;
+  border-top: 2rpx solid #eee;
+  border-bottom: 2rpx solid #eee;
+  z-index: 3;
+}
+.details-top{
+  position: relative;
+  padding-bottom: 50rpx;
+}
+.up-down{
+  width: 60rpx;
+  height: 50rpx;
+  display: none;
+}
+.more .on{
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -30rpx;
+  display: block;
+}
+.details-bottom{
+  display: none;
+}
+.details-bottom.on{
+  display: block;
 }
