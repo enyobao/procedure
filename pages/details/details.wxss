@@ -16,6 +16,7 @@
     width: 750rpx;
 }
 .header{
+    position: relative;
     line-height: 50rpx;
     padding: 20rpx 25rpx;
     width: 700rpx;
@@ -30,6 +31,23 @@
 .price{
     color: #f00;
     font-size: 40rpx;
+}
+.evaluate{
+    position: absolute;
+    right: 20rpx;
+    top: 120rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    color: #999;
+}
+.evaluateImg{
+    width: 60rpx;
+    height: 60rpx;
+    vertical-align: top;
+}
+.evaluate.on{
+    color: #00e870;
 }
 .nav{
     background: #fff;

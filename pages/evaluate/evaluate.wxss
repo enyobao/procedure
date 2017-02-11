@@ -1,0 +1,20 @@
+/* pages/evaluate/evaluate.wxss */
+.container{
+    padding: 20rpx;
+    background: #fff;
+    line-height: 60rpx;
+    color: #333;
+}
+.imgBox{
+    width: 60rpx;
+    height: 60rpx;
+    background: url(../img/star.png);
+}
+.imgBox.on{
+    background: url(../img/staron.png);
+}
+.text{
+    margin-bottom: 20rpx;
+    width: 100%;
+    border: 2rpx solid #eee;
+}

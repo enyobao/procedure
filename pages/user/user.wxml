@@ -14,7 +14,7 @@
     </view>
     <view class="details">
         <block wx:for="{{details}}" wx:key="property">
-            <template is="userTmp" data="{{item,index,currentIndex,down}}"/>
+            <template is="userTmp" data="{{item,index,down}}"/>
         </block>
     </view>
 </view>

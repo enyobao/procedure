@@ -1,0 +1,14 @@
+<import src="../template/template.wxml"/>
+<view class="container">
+    <form bindsubmit="handleEvaluate">
+        <view class="clearfix">
+            <view class="fl">评分：</view>
+            <block wx:for="{{star}}" wx:key="property">
+                <template is="evaluateTmp" data="{{item,index}}"/>
+            </block>
+        </view>
+        <view>评价：</view>
+        <textarea name="text" class="text" placeholder="评论不得超过500字"/>
+        <button form-type="submit" type="primary">确定</button>
+    </form>
+</view>

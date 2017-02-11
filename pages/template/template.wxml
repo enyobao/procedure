@@ -18,14 +18,22 @@
         <view class="title">{{item.campTitle}}</view>
         <view class="date-departure">{{item.createTime}} {{item.departure}}</view>
         <view class="price">{{item.amount}}</view>
-        <view class="status">{{item.statusMark}}</view>
-        <view class="more" bindtap="showUserDetail" id="{{index}}">
-          <image src="../img/up.png" class="up-down {{down?'on':''}}"></image>
-          <image src="../img/down.png" class="up-down {{!down?'on':''}}"></image>
+        <view class="evaluate {{item.status == 3?'on':''}}" bindtap="goEvaluate" campid="{{item.campId}}">去评价</view>
+        <view class="status {{item.status==1?'red':''}}{{item.status==2?'green':''}}">{{item.statusMark}}</view>
+        <view class="more {{down[index].down?'down':'top'}}" bindtap="showUserDetail" id="{{index}}">
+          <image src="../img/up.png" class="up-down {{down[index].down?'on':''}}"></image>
+          <image src="../img/down.png" class="up-down {{!down[index].down?'on':''}}"></image>
         </view>
     </view>
-    <view class="details-bottom {{down && (currentIndex == index+1)?'on':''}}">
-        sassjdfhsjf
+    <view class="details-bottom {{down[index].down?'on':''}}">
+        <view class="user-title">报名游客信息</view>
+        <view class="clearfix">
+          <view class="username fl bold">用户名</view>
+          <view class="phone fl bold">电话</view>
+        </view>
+        <block wx:for="{{item.userDetail}}" wx:key="property" >
+          <template is="userDetailTmp" data="{{item,index}}"/>
+        </block>
     </view>  
   </view>
 </template>
@@ -43,4 +51,16 @@
 
 <template name="sex">
   <radio class="radio" checked="false" value="{{item.value}}">{{item.sex}}</radio>
+</template>
+
+<template name="userDetailTmp">
+  <view class="clearfix">
+    <view class="username fl">{{item.userName}}</view>
+    <view class="phone fl">{{item.phone}}</view>
+  </view>
+</template>
+
+<template name="evaluateTmp">
+    <view class="imgBox fl {{item.star?'on':''}}"  bindtap="clickStar" id="{{index}}">
+    </view>
 </template>

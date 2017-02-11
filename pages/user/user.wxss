@@ -44,27 +44,49 @@
 }
 .details-list .title{
   position: absolute;
-  left:340rpx;
+  left:320rpx;
   top:10rpx;
   width:300rpx;
   font-weight: bold;
 }
 .details-list .price{
   position: absolute;
-  left: 340rpx;
+  left: 330rpx;
   top: 170rpx;
   color: #f00;
 }
 .details-list .date-departure{
   position: absolute;
-  left:340rpx;
+  left:330rpx;
   top:110rpx;
 }
 .details-list .status{
   position: absolute;
   right: -20rpx;
   top: -20rpx;
-  background: #ccc; 
+  font-size: 25rpx;
+  text-align: center;
+  width: 130rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #fff;
+  background: #999; 
+}
+.details-list .red{
+  background: #f00;
+}
+.details-list .green{
+  background: #00e870;
+}
+.details-list .evaluate{
+  position: absolute;
+  right: 0;
+  top: 170rpx;
+  z-index: 3;
+  display: none;
+}
+.details-list .evaluate.on{
+  display: block;
 }
 .details-list .more{
   width: 710rpx;
@@ -72,9 +94,13 @@
   position: absolute;
   left: 0;
   top: 220rpx;
-  border-top: 2rpx solid #eee;
-  border-bottom: 2rpx solid #eee;
   z-index: 3;
+}
+.details-list .top{
+  border-top:2rpx solid #eee;
+}
+.details-list .down{
+  border-bottom: 2rpx solid #eee;
 }
 .details-top{
   position: relative;
@@ -93,8 +119,26 @@
   display: block;
 }
 .details-bottom{
+  padding-top: 30rpx;
   display: none;
+  font-size:26rpx;
 }
 .details-bottom.on{
   display: block;
+}
+.user-title{
+  width: 710rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-bottom: 2rpx dotted #eee;
+}
+.username,.phone{
+  width: 355rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+.bold{
+  font-weight: bold;
 }

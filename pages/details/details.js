@@ -47,7 +47,8 @@ Page({
     interval:5000,
     duration:1000,
     currentId:0,
-    detailsId:0
+    detailsId:0,
+    evaluate:0
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -90,5 +91,9 @@ Page({
           // complete
         }
       }) 
+  },
+  evaluateDetails:function(){
+    var that = this;
+    that.setData({evaluate:1});
   }
 })
