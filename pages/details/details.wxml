@@ -3,7 +3,7 @@
     <scroll-view scroll-y="true" class="wrap" id="{{detailsId}}">
         <view class="slide-con">
             <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
-                <block wx:for="{{imgUrls}}" wx:key="property">
+                <block wx:for="{{imageArr}}" wx:key="property">
                     <swiper-item>
                         <navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>
                         <image src="{{item.url}}" class="slide-image"></image>
@@ -12,13 +12,11 @@
             </swiper>
         </view>
         <view class="header">
-            <view class="title">主题名称</view>
-            <view class="days">x年月日-年月日</view>
-            <view class="price">价格</view>
-            <view class="evaluate {{evaluate?'on':''}}" bindtap="evaluateDetails">
+            <template is="headerTmp" data="{{data}}"/>
+            <!--<view class="evaluate {{evaluate?'on':''}}" bindtap="evaluateDetails">
                 <image src="../img/heart.png" class="evaluateImg"></image>
                 评价
-            </view>
+            </view>-->
         </view> 
         <view class="nav">
             <block wx:for="{{details}}" wx:key="property">

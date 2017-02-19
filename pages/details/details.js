@@ -23,8 +23,12 @@ Page({
         "name":"报名须知",
         "detail":"详细描述概述报名须知详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息"
       },
+      {
+        "name":"评价",
+        "detail":"暂无评价"
+      }
     ],
-    imgUrls:[
+    imageArr:[
       {
         link:"",
         url:"../img/dengshan.jpeg"
@@ -46,7 +50,14 @@ Page({
     autoplay:true,
     interval:5000,
     duration:1000,
-    currentId:0,
+    currentId:[
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
     detailsId:0,
     evaluate:0
   },
@@ -73,7 +84,14 @@ Page({
   clickToDetails:function(event){
       var id = event.currentTarget.id;
       var that = this;
-      that.setData({currentId:id});
+      var currentId = that.data.currentId;
+
+      if(currentId[id]){
+        currentId[id] = false;
+      }else{
+        currentId[id] = true;
+      }
+      that.setData({currentId:currentId});
   },
   //报名
   joinInEvent:function(event){

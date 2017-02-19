@@ -99,20 +99,38 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad');
-    var aesStr = sha1.hex_sha1("{a:1,b:2}wangguowei");
+    var js = {
+        locationName:"",
+        campType:"",
+        keyword:"",
+        page:"1"
+      };
+    var js1 = JSON.stringify(js);
+    var aesStr = sha1.sha1(js1+"wangguowei");
     console.log("aesStr"+aesStr);
-    var that = this
+    var that = this;
     wx.request({
-      url: 'https://114.215.134.69/api/campaign/list?locationName&campType&keyword&page&aesStr='+aesStr, //仅为示例，并非真实的接口地址
+      url: 'https://www.ioutdoor.org/api/campaign/list', //仅为示例，并非真实的接口地址
       method:'POST',
       header: {
           'content-type': 'application/json'
       },
+      // header: {"Content-Type":"application/x-www-form-urlencoded"},
+      data:{
+        locationName:"",
+        campType:"",
+        keyword:"",
+        page:"1",
+        aesStr:aesStr
+      },
+      complete:function(res){
+        console.log("complete"+JSON.stringify(res));
+      },
       success: function(res) {
-        console.log(JSON.stringify(res));
+        console.log("success"+JSON.stringify(res));
       },
       fail:function(res){
-        console.log(JSON.stringify(res));
+        console.log("fail"+JSON.stringify(res));
       }
     })
     //调用应用实例的方法获取全局数据
