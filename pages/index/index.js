@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-var app = getApp()
+var app = getApp();
 var sha1=require('../../utils/sha1.js');
 var util = require('../../utils/util');
 Page({
@@ -45,7 +45,8 @@ Page({
         locationName:"",
         campType:"",
         keyword:"",
-        page:"1"
+        page:"1",
+        sessionId:app.globalData.sessionId
       };
     var js1 = JSON.stringify(js);
     var aesStr = sha1.sha1(js1+"wangguowei");
@@ -54,18 +55,20 @@ Page({
         campType:"",
         keyword:"",
         page:"1",
+        sessionId:app.globalData.sessionId,
         aesStr:aesStr
       };
-    //获取活动列表信息
-    app.getAPI('campaign/list',data,that.getList);
+    
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
         userInfo:userInfo
       });
-      console.log(that.data.userInfo);
-    })
+      console.log(that.data);
+    });
+    //获取活动列表信息
+    // app.getAPI('campaign/list',data,that.getList);
   },
   getList:function(res) {
       var that = this;
