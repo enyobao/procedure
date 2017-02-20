@@ -12,8 +12,8 @@
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
       <block wx:for="{{imgUrls}}" wx:key="property">
           <swiper-item>
-              <navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>
-              <image src="{{item.url}}" class="slide-image"></image>
+              <!--<navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>-->
+              <image src="{{item.img}}" class="slide-image" campId="{{item.id}}"></image>
           </swiper-item>
       </block>
     </swiper>
@@ -27,8 +27,8 @@
       <view class="nav-list-box" current="{{currentShow}}" bindchange="bindChange">
         <view class="nav-city-con {{currentShow == 1 ? 'on' : ''}}">
             <checkbox-group class="menu clearfix" bindchange="checkBoxChange">
-                <block wx:for="{{city}}" wx:key="property">
-                    <template is="city" data="{{item,index,checkBoxChecked}}"/> 
+                <block wx:for="{{hotArea}}" wx:key="property">
+                    <template is="hotArea" data="{{item,index,checkBoxChecked}}"/> 
                 </block>
             </checkbox-group>
             <view class="choose-button">
@@ -38,7 +38,7 @@
         </view>
         <view class="nav-theme-con {{currentShow == 2 ? 'on' : ''}}">
             <checkbox-group class="menu clearfix" bindchange="checkBoxChange">
-                <block wx:for="{{theme}}" wx:key="property">
+                <block wx:for="{{campTypeArr}}" wx:key="property">
                     <template is="city" data="{{item,index,checkBoxChecked}}"/> 
                 </block>
             </checkbox-group>

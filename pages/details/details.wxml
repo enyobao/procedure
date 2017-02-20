@@ -5,18 +5,14 @@
             <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
                 <block wx:for="{{imageArr}}" wx:key="property">
                     <swiper-item>
-                        <navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>
-                        <image src="{{item.url}}" class="slide-image"></image>
+                        <!--<navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>-->
+                        <image src="{{item}}" class="slide-image"></image>
                     </swiper-item>
                 </block>
             </swiper>
         </view>
         <view class="header">
-            <template is="headerTmp" data="{{data}}"/>
-            <!--<view class="evaluate {{evaluate?'on':''}}" bindtap="evaluateDetails">
-                <image src="../img/heart.png" class="evaluateImg"></image>
-                评价
-            </view>-->
+            <template is="headerTmp" data="{{header}}"/>
         </view> 
         <view class="nav">
             <block wx:for="{{details}}" wx:key="property">

@@ -98,6 +98,10 @@
   position: absolute;
   left:380rpx;
   top:150rpx;
+  width: 320rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .details-list .price{
   position: absolute;
@@ -162,7 +166,7 @@
   padding: 25rpx;
 }
 .option-menu{
-  width:120rpx;
+  /*width:120rpx;*/
   height:50rpx;
   line-height: 50rpx;
   text-align: center;

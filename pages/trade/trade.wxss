@@ -9,7 +9,7 @@
     line-height: 50rpx;
     padding: 20rpx 25rpx;
     width: 700rpx;
-    height: 150rpx;
+    /*height: 150rpx;*/
     background: #fff;
     margin-bottom: 20rpx;
 }
@@ -30,8 +30,11 @@
     padding: 20rpx 0;
     border-bottom: 2rpx solid #eee;
 }
-.trade-details,.tourist-details{
+.trade-details,.tourist-details,.touristNum{
     padding: 20rpx 0;
+}
+.touristNum{
+    font-weight: bold;
 }
 .fl{
     float: left;
@@ -48,4 +51,11 @@
     width: 660rpx;
     padding:20rpx;
     background: #f8f8f8;
+}
+.addUser{
+    display: inline-block;
+    width: 80rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
 }

@@ -27,5 +27,18 @@ App({
   globalData:{
     userInfo:null,
     starNum:0
+  },
+  //接口公用函数
+  getAPI:function(api,data,fnSuc){
+    wx.request({
+      url: 'https://www.ioutdoor.org/api/'+api, 
+      method:'POST',
+      header: {"Content-Type":"application/x-www-form-urlencoded"},
+      data:data,
+      success: fnSuc,
+      fail:function(){
+        
+      }
+    })
   }
 })

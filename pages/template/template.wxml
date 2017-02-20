@@ -3,18 +3,19 @@
 </template>
 
 <template name="detailsTmp">
-  <view class="details-list" bindtap="getDetails" id="{{index}}">
-    <image class="image" src="{{item.imgsrc}}"></image>
-    <view class="title">{{item.title}}({{item.days}})</view>
-    <view class="date-departure">{{item.date}} {{item.departure}}</view>
-    <view class="price">{{item.price}}</view>
+  <view class="details-list" bindtap="getDetails" id="{{item.id}}">
+    <image class="image" src="{{item.headImg}}"></image>
+    <view class="title">{{item.title}}</view>
+    <view class="date-departure">{{item.beginTime}} {{item.rendezvous}}</view>
+    <view class="price">￥{{item.price}}</view>
   </view>
 </template>
 
 <template name="headerTmp">
-    <view class="title">主题名称</view>
-    <view class="days">x年月日-年月日</view>
-    <view class="price">价格</view>
+    <view class="title">{{header.title}}</view>
+    <view class="destination">{{header.rendezvous}} - {{header.destination}}</view>
+    <view class="days">({{header.beginTime}}至{{header.endTime}})</view>
+    <view class="price">￥{{header.price}}</view>
 </template>
 
 <template name="userTmp">
@@ -45,13 +46,36 @@
 </template>
 
 <template name="city">
-    <checkbox class="option-menu" value="{{item.name}}" checked="{{!checkBoxChecked?'':'true'}}">{{item.name}}</checkbox>
+    <checkbox class="option-menu" value="{{item}}" checked="{{!checkBoxChecked?'':'true'}}">{{item}}</checkbox>
+</template>
+
+<template name="hotArea">
+    <checkbox class="option-menu" value="{{item.locationName}}" checked="{{!checkBoxChecked?'':'true'}}">{{item.locationName}}</checkbox>
 </template>
 
 <template name="detailsConTmp">
     <view class="nav-list">
         <view class="nav-show" bindtap="clickToDetails" id="{{index}}">{{item.name}}</view>
-        <view class="nav-details-show {{currentId[index]? 'on' : ''}}">{{item.detail}}</view>
+        <view class="nav-details-show {{currentId[index]? 'on' : ''}}">
+            <block wx:if="{{index == 4}}">
+                <block wx:if="{{item.detail}}">
+                    <block wx:for="{{item.detial}}" wx:key="property">
+                        <view >
+                            <view class="username">{{username}}</view>
+                            <view class="starLevel">{{starLevel}}</view>
+                            <view class="content">{{content}}</view>
+                            <view class="createTime">{{createTime}}</view>
+                        </view>
+                    </block>
+                </block>
+                <block wx:else>
+                    暂无评价
+                </block>
+            </block>
+            <block wx:else>
+                {{item.detail}}
+            </block>
+        </view>
     </view>
 </template>
 

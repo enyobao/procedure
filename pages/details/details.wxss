@@ -20,17 +20,17 @@
     line-height: 50rpx;
     padding: 20rpx 25rpx;
     width: 700rpx;
-    height: 150rpx;
+    /*height: 150rpx;*/
     background: #fff;
     margin-bottom: 20rpx;
 }
 .title{
-    font-size: 40rpx;
+    font-size: 30rpx;
     color: #00bfff;
 }
 .price{
     color: #f00;
-    font-size: 40rpx;
+    font-size: 30rpx;
 }
 .evaluate{
     position: absolute;

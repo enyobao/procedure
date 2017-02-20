@@ -1,57 +1,42 @@
 // pages/details/details.js
 var app = getApp();
+var sha1=require('../../utils/sha1.js');
 Page({
   data:{
+    header:{
+      title:"",
+      price:"",
+      beginTime:"",
+      endTime:""
+    },
     details:[
       {
-        "name":"概述",
-        "detail":"详细描述概述"
-      },
-      {
-        "name":"基本信息",
-        "detail":"详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息"
+        "name":"路线介绍",
+        "detail":""
       },
       {
         "name":"行程安排",
-        "detail":"详细描述概述行程安排详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息"
+        "detail":""
       },
       {
         "name":"费用说明",
-        "detail":"详细描述概述费用说明详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息"
+        "detail":""
       },
       {
-        "name":"报名须知",
-        "detail":"详细描述概述报名须知详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息详细描述概述基本信息"
+        "name":"更多介绍",
+        "detail":""
       },
       {
-        "name":"评价",
-        "detail":"暂无评价"
+        "name":"评论",
+        "detail":""
       }
     ],
-    imageArr:[
-      {
-        link:"",
-        url:"../img/dengshan.jpeg"
-      },
-      {
-        link:"",
-        url:"../img/run2.jpeg"
-      },
-      {
-        link:"",
-        url:"../img/bike.jpeg"
-      },
-      {
-        link:"",
-        url:"../img/hike.jpeg"
-      }
-    ],
+    imageArr:[],
     indicatorDots:true,
     autoplay:true,
     interval:5000,
     duration:1000,
     currentId:[
-      false,
       false,
       false,
       false,
@@ -63,10 +48,23 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    console.log(JSON.stringify(options));
     var that = this;
     var id = options.id;
-    that.setData({detailsId:id});
+    that.setData({detailsId:id});//本次活动id
+
+    var js = {
+        id:id,
+        page:"1"
+      };
+    var js1 = JSON.stringify(js);
+    var aesStr = sha1.sha1(js1+"wangguowei");
+    var data ={
+        id:id,
+        page:"1",
+        aesStr:aesStr
+      };
+    //获取活动详情信息
+    app.getAPI('campaign/detail',data,that.getDetail);
   },
   onReady:function(){
     // 页面渲染完成
@@ -79,6 +77,25 @@ Page({
   },
   onUnload:function(){
     // 页面关闭
+  },
+  //获取活动详情回调
+  getDetail:function(res){
+    // console.log("getDetail:"+JSON.stringify(res));
+    var that = this;
+    if(res.data.code == 200){
+        var data = res.data.data;
+        var details = that.data.details;
+        var header = {title:data.title,price:data.price,beginTime:data.beginTime,endTime:data.endTime,destination:data.destination,rendezvous:data.rendezvous};
+        details[0].detail = data.lineIntroduction;
+        details[1].detail = data.scheduling;
+        details[2].detail = data.expenseExplanation;
+        details[3].detail = data.moreIntroduction;
+        if(data.evaluateArr.length > 0){
+          details[4].detail = data.evaluateArr;
+        }
+        that.setData({details:details,imageArr:data.imageArr,header:header});
+    }
+
   },
   //了解详情
   clickToDetails:function(event){
@@ -98,7 +115,7 @@ Page({
      var that = this;
      var id = event.currentTarget.id;
       wx.navigateTo({
-        url: '/pages/trade/trade?id='+that.data.detailsId,
+        url: '/pages/trade/trade?id='+that.data.detailsId+'&header='+JSON.stringify(that.data.header),
         success: function(res){
           // success
         },

@@ -2,88 +2,27 @@
 //获取应用实例
 var app = getApp()
 var sha1=require('../../utils/sha1.js');
+var util = require('../../utils/util');
 Page({
   data: {
-    city:[
-      {name:"北京"},
-      {name:"上海"},
-      {name:"广州"},
-      {name:"深圳"},
-      {name:"厦门"},
-      {name:"青岛"},
-      {name:"西安"},
-      {name:"成都"},
-      {name:"重庆"}
-    ],
-    theme:[
-      {name:'徒步'},
-      {name:'摄影'},
-      {name:'登山'},
-      {name:'骑行'},
-      {name:'跑步'},
-      {name:'赛事'},
-      {name:'俱乐部'},
-      {name:'结伴'},
-      {name:'AA'}
-    ],
+    hotArea:[],
+    campTypeArr:[],
     details:[
       {
+        id:0,
         title:"色彩云南 色彩云南 色彩云南 色彩云南",
         price:"¥2990",
-        date:"1/30",
-        departure:"昆明出发",
+        beginTime:"开始时间",
+        rendezvous:"昆明出发",
+        destination:"目的地",
         days:"8日行程",
-        imgsrc:"../img/car.jpeg"
-      },
-      {
-        title:"色彩云南 色彩云南 色彩云南 色彩云南",
-        price:"¥2990",
-        date:"2/30",
-        departure:"昆明出发",
-        days:"8日行程",
-        imgsrc:"../img/car.jpeg"
-      },
-      {
-        title:"色彩云南 色彩云南 色彩云南 色彩云南",
-        price:"¥2990",
-        date:"3/30",
-        departure:"昆明出发",
-        days:"8日行程",
-        imgsrc:"../img/car.jpeg"
-      },
-      {
-        title:"色彩云南 色彩云南 色彩云南 色彩云南",
-        price:"¥2990",
-        date:"2/30",
-        departure:"昆明出发",
-        days:"8日行程",
-        imgsrc:"../img/car.jpeg"
-      },
-      {
-        title:"色彩云南 色彩云南 色彩云南 色彩云南",
-        price:"¥2990",
-        date:"3/30",
-        departure:"昆明出发",
-        days:"8日行程",
-        imgsrc:"../img/car.jpeg"
+        headImg:"../img/car.jpeg"
       }
     ],
     imgUrls:[
       {
-        link:"",
-        url:"../img/dengshan.jpeg"
-      },
-      {
-        link:"",
-        url:"../img/run2.jpeg"
-      },
-      {
-        link:"",
-        url:"../img/bike.jpeg"
-      },
-      {
-        link:"",
-        url:"../img/hike.jpeg"
+        id:"",
+        img:"../img/dengshan.jpeg"
       }
     ],
     indicatorDots:true,
@@ -97,8 +36,11 @@ Page({
     checkBoxDetails:[],
     checkBoxChecked:false
   },
+  onPullDownRefresh: function(){
+    wx.stopPullDownRefresh();
+  },
   onLoad: function () {
-    console.log('onLoad');
+    var that = this;
     var js = {
         locationName:"",
         campType:"",
@@ -107,39 +49,36 @@ Page({
       };
     var js1 = JSON.stringify(js);
     var aesStr = sha1.sha1(js1+"wangguowei");
-    console.log("aesStr"+aesStr);
-    var that = this;
-    wx.request({
-      url: 'https://www.ioutdoor.org/api/campaign/list', //仅为示例，并非真实的接口地址
-      method:'POST',
-      header: {
-          'content-type': 'application/json'
-      },
-      // header: {"Content-Type":"application/x-www-form-urlencoded"},
-      data:{
+    var data ={
         locationName:"",
         campType:"",
         keyword:"",
         page:"1",
         aesStr:aesStr
-      },
-      complete:function(res){
-        console.log("complete"+JSON.stringify(res));
-      },
-      success: function(res) {
-        console.log("success"+JSON.stringify(res));
-      },
-      fail:function(res){
-        console.log("fail"+JSON.stringify(res));
-      }
-    })
+      };
+    //获取活动列表信息
+    app.getAPI('campaign/list',data,that.getList);
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
         userInfo:userInfo
-      })
+      });
+      console.log(that.data.userInfo);
     })
+  },
+  getList:function(res) {
+      var that = this;
+      console.log("success"+JSON.stringify(res));
+      // var that = this;
+      var data = res.data;
+      if(data.code == 200){//正确数据
+          var list = data.data.list; 
+          var img = data.data.img;
+          var hotAreaArr = data.data.hotAreaArr;
+          var campTypeArr = data.data.campTypeArr;
+          that.setData({details:list,imgUrls:img,hotArea:hotAreaArr,campTypeArr:campTypeArr});
+      }
   },
   //滑动tab 切换
   bindChange:function(e){
