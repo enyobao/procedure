@@ -12,36 +12,6 @@ App({
     if(this.globalData.userInfo){
       typeof cb == "function" && cb(this.globalData.userInfo)
     }else{
-      //调用登录接口
-      that.loginFun();
-    }
-  },
-  getSettion:function(res){
-    console.log("getSettion"+JSON.stringify(res));
-    wx.setStorage({
-      key: 'sessionId',
-      data: res.data,
-      success:function(res){
-        console.log("storage"+JSON.stringify(res));
-      }
-    });
-  },
-  globalData:{
-    userInfo:null,
-    starNum:0,
-    sessionId:""
-  },
-  loginFun:function(){
-    var that = this;
-    wx.login({
-      success: function (res) {
-        console.log("userInfoFun:"+JSON.stringify(res));
-        var js={code:res.code};
-        var js1 = JSON.stringify(js);
-        var aesStr = sha1.sha1(js1+"wangguowei");
-        var userData={code:res.code,aesStr:aesStr};
-        // console.log("userData"+JSON.stringify(userData));
-        that.getAPI('user/secret',userData,that.getSettion); 
         wx.getUserInfo({
           success: function (res) {
             that.globalData.userInfo = res.userInfo
@@ -49,15 +19,12 @@ App({
             // console.log("userInfoFun:"+JSON.stringify(res));
           }
         });
-        // wx.getStorage({
-        //   key:'sessionId',
-        //   success:function(res){
-        //     console.log("sessionId:"+res.data);
-        //     that.globalData.sessionId = res.data;
-        //   }
-        // });
-      }
-    });
+    }
+  },
+  globalData:{
+    userInfo:null,
+    starNum:0,
+    sessionId:""
   },
   //接口公用函数
   getAPI:function(api,data,fnSuc){

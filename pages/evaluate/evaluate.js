@@ -1,4 +1,6 @@
 // pages/evaluate/evaluate.js
+var app = getApp();
+var sha1=require('../../utils/sha1.js');
 Page({
   data:{
     star:[
@@ -7,9 +9,14 @@ Page({
       {star:false},
       {star:false},
       {star:false}
-    ]
+    ],
+    orderId:0,
+    starLevel:0
   },
   onLoad:function(options){
+    var orderId = options.orderId;
+    var that = this;
+    that.setData({orderId:orderId});
     // 页面初始化 options为页面跳转所带来的参数
   },
   onReady:function(){
@@ -44,7 +51,30 @@ Page({
   },
   handleEvaluate:function(e){
     console.log(JSON.stringify(e));
-    var val = e.detail.value;
-    var starNum = global.starNum;
+    var that = this;
+    var mark = e.detail.value;
+    var starLevel = global.starNum;
+    var orderId = that.data.orderId;
+
+    var js = {
+        starLevel:"'"+starLevel+"'",
+        orderId:"'"+orderId+"'",
+        mark:mark,
+        sessionId:app.globalData.sessionId        
+      };
+    var js1 = JSON.stringify(js);
+    var aesStr = sha1.sha1(js1+"wangguowei");
+    var data ={
+        starLevel:"'"+starLevel+"'",
+        orderId:"'"+orderId+"'",
+        mark:mark,
+        sessionId:app.globalData.sessionId,
+        aesStr:aesStr
+      };
+    //获取活动详情信息
+    app.getAPI('order/evaluate',data,that.getEvaluateRes);
+  },
+  getEvaluateRes:function(res){
+    console.log("getEvaluateRes"+JSON.stringify(res));
   }
 })

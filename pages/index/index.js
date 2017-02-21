@@ -41,23 +41,7 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    var js = {
-        locationName:"",
-        campType:"",
-        keyword:"",
-        page:"1",
-        sessionId:app.globalData.sessionId
-      };
-    var js1 = JSON.stringify(js);
-    var aesStr = sha1.sha1(js1+"wangguowei");
-    var data ={
-        locationName:"",
-        campType:"",
-        keyword:"",
-        page:"1",
-        sessionId:app.globalData.sessionId,
-        aesStr:aesStr
-      };
+    that.loginFun();
     
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
@@ -67,13 +51,79 @@ Page({
       });
       console.log(that.data);
     });
-    //获取活动列表信息
-    // app.getAPI('campaign/list',data,that.getList);
+  },
+  loginFun:function(){
+    console.log("login2");
+    var that = this;
+    wx.login({
+      success: function (res) {
+        console.log("userInfoFun:"+JSON.stringify(res)); 
+        wx.getUserInfo({
+          success: function (res) {
+            app.globalData.userInfo = res.userInfo;
+            typeof cb == "function" && cb(that.globalData.userInfo);
+          }
+        });
+        var js={code:res.code};
+        var js1 = JSON.stringify(js);
+        var aesStr = sha1.sha1(js1+"wangguowei");
+        var userData={code:res.code,aesStr:aesStr};
+        app.getAPI('user/secret',userData,that.getSettion);
+      }
+    });
+  },
+  getSettion:function(res){
+    app.globalData.sessionId = res.data.data;
+    var that = this;
+    wx.setStorage({
+      key: 'sessionId',
+      data: res.data.data,
+      success:function(res){
+        console.log("storage"+JSON.stringify(res));
+        var userInfo = JSON.stringify(app.globalData.userInfo);
+        var regs = {
+                name:app.globalData.userInfo.nickName,
+                photoUrl:app.globalData.userInfo.avatarUrl,
+                sessionId:app.globalData.sessionId,
+                userInfo:"'"+userInfo+"'"
+              };
+        var regs1 = JSON.stringify(regs);
+        var aesStr = sha1.sha1(regs1+"wangguowei");
+        var data ={
+            name:app.globalData.userInfo.nickName,
+            photoUrl:app.globalData.userInfo.avatarUrl,
+            sessionId:app.globalData.sessionId,
+            userInfo:"'"+userInfo+"'",
+            aesStr:aesStr
+          };
+        //获取活动列表信息
+        app.getAPI('user/register',data,function(res){
+          console.log("register"+JSON.stringify(res));
+        });
+        var js = {
+            locationName:"",
+            campType:"",
+            keyword:"",
+            page:"1",
+            sessionId:app.globalData.sessionId
+          };
+        var js1 = JSON.stringify(js);
+        var aesStr = sha1.sha1(js1+"wangguowei");
+        var data ={
+            locationName:"",
+            campType:"",
+            keyword:"",
+            page:"1",
+            sessionId:app.globalData.sessionId,
+            aesStr:aesStr
+          };
+        //获取活动列表信息
+        app.getAPI('campaign/list',data,that.getList);
+      }
+    });
   },
   getList:function(res) {
       var that = this;
-      console.log("success"+JSON.stringify(res));
-      // var that = this;
       var data = res.data;
       if(data.code == 200){//正确数据
           var list = data.data.list; 
@@ -107,7 +157,6 @@ Page({
   //跳转到详情页
   getDetails:function(event){
     var id = event.currentTarget.id;
-    console.log(id);
     wx.navigateTo({
       url: '/pages/details/details?id='+id,
       success: function(res){
@@ -141,8 +190,6 @@ Page({
   citySelected:function(event){
     var that =this;
     var checkedData = that.data.checkBoxDetails;
-    
-    console.log("checkedData"+JSON.stringify(checkedData));
     that.setData({currentShow:0});
   },
   //重置

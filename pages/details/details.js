@@ -54,13 +54,15 @@ Page({
 
     var js = {
         id:id,
-        page:"1"
+        page:"1",
+        sessionId:app.globalData.sessionId        
       };
     var js1 = JSON.stringify(js);
     var aesStr = sha1.sha1(js1+"wangguowei");
     var data ={
         id:id,
         page:"1",
+        sessionId:app.globalData.sessionId,
         aesStr:aesStr
       };
     //获取活动详情信息

@@ -1,5 +1,6 @@
 // pages/user/user.js
 var app = getApp();
+var sha1=require('../../utils/sha1.js');
 Page({
   data:{  
     motto: 'Hello World',
@@ -19,6 +20,7 @@ Page({
           {userName:'anier',phone:'12333445566'}         
         ],
         campId:'活动ID',
+        orderId:'订单id',
         amount:"总价格",
         userId:'用户id'
       },
@@ -36,6 +38,7 @@ Page({
           {userName:'anier',phone:'12333445566'}         
         ],
         campId:'活动ID',
+        orderId:'订单id',
         amount:"总价格",
         userId:'用户id'
       },
@@ -53,6 +56,7 @@ Page({
           {userName:'anier',phone:'12333445566'}         
         ],
         campId:'活动ID',
+        orderId:'订单id',
         amount:"总价格",
         userId:'用户id'
       }
@@ -78,7 +82,20 @@ Page({
       that.setData({
         userInfo:userInfo
       })
-    })
+    });
+    var js = {
+        page:"1",
+        sessionId: app.globalData.sessionId
+    };
+    var js1 = JSON.stringify(js);
+    var aesStr = sha1.sha1(js1+"wangguowei");
+    var data={
+        page:"1",
+        sessionId: app.globalData.sessionId,
+        aesStr: aesStr
+    }
+    //获取个人中心-订单列表信息
+    app.getAPI('order/list',data,that.getOrderList);
   },
   onReady:function(){
     // 页面渲染完成
@@ -98,6 +115,10 @@ Page({
       url: '../logs/logs'
     })
   },
+  //获取个人中心-订单列表回调
+  getOrderList:function(res){
+    console.log("getOrderList:"+JSON.stringify(res));
+  },
   showUserDetail:function(e){
     var that = this;
     var index = e.currentTarget.id;
@@ -109,12 +130,13 @@ Page({
     }
     that.setData({down:down});
   },
+  //去评价
   goEvaluate:function(e){
     var that = this;
-    var campId = e.currentTarget.campid;
+    var orderId = e.currentTarget.orderid;
 
     wx.navigateTo({
-      url: '../evaluate/evaluate?campId='+campId,
+      url: '../evaluate/evaluate?orderId='+orderId,
       success: function(res){
         // success
       },

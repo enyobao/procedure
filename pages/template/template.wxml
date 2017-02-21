@@ -25,7 +25,7 @@
         <view class="title">{{item.campTitle}}</view>
         <view class="date-departure">{{item.createTime}} {{item.departure}}</view>
         <view class="price">{{item.amount}}</view>
-        <view class="evaluate {{item.status == 3?'on':''}}" bindtap="goEvaluate" campid="{{item.campId}}">去评价</view>
+        <view class="evaluate {{item.status == 3?'on':''}}" bindtap="goEvaluate" campid="{{item.campId}}" orderid="{{item.orderId}}">去评价</view>
         <view class="status {{item.status==1?'red':''}}{{item.status==2?'green':''}}">{{item.statusMark}}</view>
         <view class="more {{down[index].down?'down':'top'}}" bindtap="showUserDetail" id="{{index}}">
           <image src="../img/up.png" class="up-down {{down[index].down?'on':''}}"></image>

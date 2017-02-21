@@ -18,7 +18,6 @@ Page({
     var campId = options.id;
     var header = JSON.parse(options.header);
     that.setData({header:header,userInfo:app.globalData.userInfo,campId:campId});
-    console.log(JSON.stringify(app.globalData.userInfo));
   },
   onReady:function(){
     // 页面渲染完成
@@ -51,6 +50,24 @@ Page({
         json.mark = value["form["+i+"].mark"];
         formArr.push(json);
     }
+    var f2 = JSON.stringify(formArr);
+    console.log("formArr.string"+f2);
+    var js = {
+        campId:"'"+ that.data.campId+"'",
+        userList: "'"+f2+"'",
+        num:"'" +that.data.num+"'",
+        sessionId: app.globalData.sessionId
+    };
+    var js1 = JSON.stringify(js);
+    var aesStr = sha1.sha1(js1+"wangguowei");
+    var userData={
+        campId: "'"+that.data.campId+"'",
+        userList:  "'"+f2+"'",
+        num: "'" +that.data.num+"'",
+        sessionId: app.globalData.sessionId,
+        aesStr: aesStr
+    }
+    app.getAPI('order/add',userData,that.addOrder);
     //模态弹窗
     // wx.showModal({
     //   title: '提示',
@@ -72,6 +89,11 @@ Page({
     //   }
     // })
     console.log(JSON.stringify(formArr));
+  },
+  //创建订单回调函数
+  addOrder:function(res){
+    console.log("addOrder"+JSON.stringify(res));
+    //此处调用微信支付接口
   },
   reduceUserFun:function(){
     var num = this.data.num;
