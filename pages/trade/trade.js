@@ -9,6 +9,7 @@ Page({
     ],
     header:{},
     num:1,
+    total_Price:1,
     userInfo:null,
     campId:0
   },
@@ -17,7 +18,7 @@ Page({
     var that = this;
     var campId = options.id;
     var header = JSON.parse(options.header);
-    that.setData({header:header,userInfo:app.globalData.userInfo,campId:campId});
+    that.setData({header:header,userInfo:app.globalData.userInfo,campId:campId,total_price:header.price});
   },
   onReady:function(){
     // 页面渲染完成
@@ -99,12 +100,14 @@ Page({
     var num = this.data.num;
     if(num>0){
         num--;
-        this.setData({num:num});
+        var total_price = this.data.header.price * num;
+        this.setData({num:num,total_price:total_price});
     }
   },
   addUserFun:function(){
     var num = this.data.num;
     num++;
-    this.setData({num:num});
+    var total_price = this.data.header.price * num;
+    this.setData({num:num,total_price:total_price});
   }
 })

@@ -19,6 +19,8 @@
 }
 .price{
     color: #f00;
+}
+.header .price{
     font-size: 40rpx;
 }
 .nav-list{

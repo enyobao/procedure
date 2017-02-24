@@ -11,13 +11,17 @@
             <view class="nav-list">
                 <view class="nav-title">费用信息</view>
                 <view class="trade-details">
-                    <view class="clearfix">
+                    <view class="clearfix sign-up">
                         <view class="fl">报名人数:</view>
                         <view class="fr">
                             <button class="reduce" size="mini" bindtap="reduceUserFun">-</button>
                             <input value="{{num}}" name="num" class="addUser" disabled="true"/>
                             <button class="add" size="mini" bindtap="addUserFun">+</button>
                         </view>
+                    </view>
+                    <view class="clearfix">
+                        <view class="fl">总价:</view>
+                        <view class="fr price">￥{{total_price}}</view>
                     </view>
                 </view>
             </view>

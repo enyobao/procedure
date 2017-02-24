@@ -3,11 +3,15 @@
 </template>
 
 <template name="detailsTmp">
-  <view class="details-list" bindtap="getDetails" id="{{item.id}}">
-    <image class="image" src="{{item.headImg}}"></image>
-    <view class="title">{{item.title}}</view>
-    <view class="date-departure">{{item.beginTime}} {{item.rendezvous}}</view>
-    <view class="price">￥{{item.price}}</view>
+  <view class="details-list clearfix" bindtap="getDetails" id="{{item.id}}">
+    <view class="fl">
+        <image class="image" src="{{item.headImg}}"></image>
+    </view>
+    <view class="fl">
+        <view class="title">{{item.title}}</view>
+        <view class="date-departure">{{item.beginTime}} {{item.rendezvous}}</view>
+        <view class="price">￥{{item.price}}</view>
+    </view>
   </view>
 </template>
 
@@ -50,7 +54,7 @@
 </template>
 
 <template name="hotArea">
-    <checkbox class="option-menu" value="{{item.locationName}}" checked="{{!checkBoxChecked?'':'true'}}">{{item.locationName}}</checkbox>
+    <checkbox class="option-menu" value="{{item}}" checked="{{!checkBoxChecked?'':'true'}}">{{item}}</checkbox>
 </template>
 
 <template name="detailsConTmp">
@@ -73,7 +77,12 @@
                 </block>
             </block>
             <block wx:else>
-                {{item.detail}}
+                <block wx:if="{{item.detail}}">
+                    {{item.detail}}
+                </block>
+                <block wx:else>
+                    暂无
+                </block>
             </block>
         </view>
     </view>
