@@ -10,7 +10,6 @@
 }
 .slide-con{
     height: 300rpx;
-    background: #f00;
 }
 .slide-image{
     width: 750rpx;

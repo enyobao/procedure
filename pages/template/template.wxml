@@ -78,7 +78,7 @@
             </block>
             <block wx:else>
                 <block wx:if="{{item.detail}}">
-                    {{item.detail}}
+                    <textarea value=" {{item.detail}}" disabled="true"/>
                 </block>
                 <block wx:else>
                     暂无
