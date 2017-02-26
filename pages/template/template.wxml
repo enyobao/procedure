@@ -25,11 +25,11 @@
 <template name="userTmp">
   <view class="details-list" id="{{index}}">
     <view class="details-top" id="{{index}}">
-        <image class="image" src="{{item.headImg}}"></image>
+        <image class="image" src="{{item.campInfo.headImg}}"></image>
         <view class="title">{{item.campTitle}}</view>
         <view class="date-departure">{{item.createTime}} {{item.departure}}</view>
         <view class="price">{{item.amount}}</view>
-        <view class="evaluate {{item.status == 3?'on':''}}" bindtap="goEvaluate" campid="{{item.campId}}" orderid="{{item.orderId}}">去评价</view>
+        <view class="evaluate {{item.status == 3?'on':''}}" bindtap="{{item.evaluateStatus==0?'goEvaluate':''}}" campid="{{item.campId}}" id="{{item.id}}">{{item.evaluateMark}}</view>
         <view class="status {{item.status==1?'red':''}}{{item.status==2?'green':''}}">{{item.statusMark}}</view>
         <view class="more {{down[index].down?'down':'top'}}" bindtap="showUserDetail" id="{{index}}">
           <image src="../img/up.png" class="up-down {{down[index].down?'on':''}}"></image>
@@ -42,7 +42,7 @@
           <view class="username fl bold">用户名</view>
           <view class="phone fl bold">电话</view>
         </view>
-        <block wx:for="{{item.userDetail}}" wx:key="property" >
+        <block wx:for="{{item.mark}}" wx:key="property" >
           <template is="userDetailTmp" data="{{item,index}}"/>
         </block>
     </view>  
@@ -62,14 +62,9 @@
         <view class="nav-show" bindtap="clickToDetails" id="{{index}}">{{item.name}}</view>
         <view class="nav-details-show {{currentId[index]? 'on' : ''}}">
             <block wx:if="{{index == 4}}">
-                <block wx:if="{{item.detail}}">
-                    <block wx:for="{{item.detial}}" wx:key="property">
-                        <view >
-                            <view class="username">{{username}}</view>
-                            <view class="starLevel">{{starLevel}}</view>
-                            <view class="content">{{content}}</view>
-                            <view class="createTime">{{createTime}}</view>
-                        </view>
+                <block wx:if="{{item.detail.length > 0}}">
+                    <block wx:for="{{item.detail}}" wx:key="property" wx:for-item="itemName">
+                        <template is="detailEvaluateTmp" data="{{itemName,index}}"/>
                     </block>
                 </block>
                 <block wx:else>
@@ -87,14 +82,22 @@
         </view>
     </view>
 </template>
-
+<template name="detailEvaluateTmp">
+    <view class="evaluateBox clearfix">
+        <image src="{{itemName.photoUrl}}" class="avatar"></image>
+        <view class="username">{{itemName.userName}}</view>
+        <view class="starLevel">评分：{{itemName.starLevel}}星</view>
+        <view class="content">{{itemName.content}}</view>
+        <view class="createTime">{{itemName.createTime}}</view>
+    </view>
+</template>
 <template name="sex">
   <radio class="radio" checked="false" value="{{item.value}}">{{item.sex}}</radio>
 </template>
 
 <template name="userDetailTmp">
   <view class="clearfix">
-    <view class="username fl">{{item.userName}}</view>
+    <view class="username fl">{{item.name}}</view>
     <view class="phone fl">{{item.phone}}</view>
   </view>
 </template>

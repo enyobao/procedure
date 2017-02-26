@@ -7,7 +7,7 @@
         <icon type="search" class="icon-search" size="20" color="#fff" bindtap="searchBtnFun"></icon>
     </view>  
 </view>
-<scroll-view class="container" scroll-y="true" bindscroll="changeHeader">
+<scroll-view class="container" scroll-y="true" bindscroll="changeHeader" bindscrolltolower="loadMore">
   <view class="slide-con">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
       <block wx:for="{{imgUrls}}" wx:key="property">
@@ -26,7 +26,7 @@
       </view>
       <view class="nav-list-box" current="{{currentShow}}" bindchange="bindChange">
         <view class="nav-city-con {{currentShow == 1 ? 'on' : ''}}">
-            <checkbox-group class="menu clearfix" bindchange="checkBoxChange">
+            <checkbox-group class="menu clearfix" bindchange="checkBoxChange" id="locationName">
                 <block wx:for="{{hotArea}}" wx:key="property">
                     <template is="hotArea" data="{{item,index,checkBoxChecked}}"/> 
                 </block>
@@ -37,7 +37,7 @@
             </view>
         </view>
         <view class="nav-theme-con {{currentShow == 2 ? 'on' : ''}}">
-            <checkbox-group class="menu clearfix" bindchange="checkBoxChange">
+            <checkbox-group class="menu clearfix" bindchange="checkBoxChange" id="campType">
                 <block wx:for="{{campTypeArr}}" wx:key="property">
                     <template is="city" data="{{item,index,checkBoxChecked}}"/> 
                 </block>

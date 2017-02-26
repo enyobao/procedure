@@ -17,8 +17,12 @@ Page({
     currentShow:0,
     scroll:0,
     currentSelectedCity:0,
-    checkBoxDetails:[],
-    checkBoxChecked:false
+    checkBoxDetails:"",
+    checkBoxChecked:false,
+    locationName:"",
+    campType:"",
+    keyword:"",
+    page:1
   },
   //下拉刷新
   onPullDownRefresh: function(){
@@ -51,6 +55,23 @@ Page({
         app.getAPI('user/secret',userData,that.getSettion);
       }
     });
+  },
+  //上拉刷新
+  loadMore:function(){
+    var that = this;
+    var js = {
+            locationName:that.data.locationName,
+            campType:that.data.campType,
+            keyword:that.data.keyword,
+            page:that.data.page+"",
+            sessionId:app.globalData.sessionId
+          };
+    var js1 = JSON.stringify(js);
+    var aesStr = sha1.sha1(js1+"wangguowei");
+    js.aesStr=aesStr;
+    //获取活动列表信息
+    console.log("page"+this.data.page);
+    app.getAPI('campaign/list',js,that.getList);
   },
   getSettion:function(res){
     console.log("getSettion"+JSON.stringify(res));
@@ -121,12 +142,19 @@ Page({
     console.log("getList"+JSON.stringify(res));
       var that = this;
       var data = res.data;
+      var page = that.data.page;
+      page++;
       if(data.code == 200){//正确数据
           var list = data.data.list; 
+          var details = that.data.details;
           var img = data.data.img;
           var hotAreaArr = data.data.hotAreaArr;
           var campTypeArr = data.data.campTypeArr;
-          that.setData({details:list,imgUrls:img,hotArea:hotAreaArr,campTypeArr:campTypeArr});
+          if(details.length>0){
+            list = details.concat(list);
+          }
+          console.log("list.length:"+list.length);
+          that.setData({details:list,imgUrls:img,hotArea:hotAreaArr,campTypeArr:campTypeArr,page:page});
       }
   },
   //滑动tab 切换
@@ -179,40 +207,45 @@ Page({
   //热门城市，种类-复选框
   checkBoxChange:function(e){
     var that = this;
+    // var checkBoxDetails = that.data.checkBoxDetails;
+    var checkedTitle = e.currentTarget.id;
     var num = e.detail.value;
+
+    switch(checkedTitle){
+      case 'locationName':
+      that.setData({locationName:num});
+        break;
+      case 'campType':
+      that.setData({campType:num});
+        break;
+    }
     console.log("种类"+num);
-    that.setData({checkBoxDetails:num});
-    // var js = {
-    //         locationName:"",
-    //         campType:"",
-    //         keyword:"",
-    //         page:"1",
-    //         sessionId:app.globalData.sessionId
-    //       };
-    // var js1 = JSON.stringify(js);
-    // var aesStr = sha1.sha1(js1+"wangguowei");
-    // var data ={
-    //     locationName:"",
-    //     campType:"",
-    //     keyword:"",
-    //     page:"1",
-    //     sessionId:app.globalData.sessionId,
-    //     aesStr:aesStr
-    //   };
-    // //获取活动列表信息
-    // app.getAPI('campaign/list',data,that.getList);
   },
   //确认筛选
   citySelected:function(event){
+    console.log("checked:"+JSON.stringify(event));
     var that =this;
     var checkedData = that.data.checkBoxDetails;
     console.log("筛选"+checkedData);
-    that.setData({currentShow:0});
+    that.setData({currentShow:0,page:1});
+
+    var js = {
+            locationName:that.data.locationName,
+            campType:that.data.campType,
+            keyword:that.data.keyword,
+            page:"1",
+            sessionId:app.globalData.sessionId
+          };
+    var js1 = JSON.stringify(js);
+    var aesStr = sha1.sha1(js1+"wangguowei");
+    js.aesStr = aesStr;
+    //获取活动列表信息
+    app.getAPI('campaign/list',js,that.getList);
   },
   //重置
   cityReset:function(){
     var that = this;
-    that.setData({checkBoxChecked:false});
+    that.setData({checkBoxChecked:false,locationName:"",campType:""});
   },
   //搜索
   searchFun:function(e){

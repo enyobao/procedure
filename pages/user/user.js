@@ -10,16 +10,16 @@ Page({
         status:1,
         statusMark:'支付完成',
         campTitle:"色彩云南 色彩云南 色彩云南 色彩云南",
-        headImg:"../img/car.jpeg",
-        evaluateMark:'评价按钮字样',
+        campInfo:{headImg:"../img/car.jpeg"},
+        evaluateStatus:'0',
         mark:'留言',
         createTime:'date',
-        userDetail:[
+        mark:[
           {userName:'anier',phone:'12333445566'},
           {userName:'anier',phone:'12333445566'},
           {userName:'anier',phone:'12333445566'}         
         ],
-        campId:'活动ID',
+        id:'活动ID',
         orderId:'订单id',
         amount:"总价格",
         userId:'用户id'
@@ -74,7 +74,6 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    console.log('onLoad')
     var that = this
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
@@ -117,7 +116,9 @@ Page({
   },
   //获取个人中心-订单列表回调
   getOrderList:function(res){
-    console.log("getOrderList:"+JSON.stringify(res));
+    console.log("getOrderList:"+JSON.stringify(res.data.data));
+    var that = this;
+    that.setData({details:res.data.data});
   },
   showUserDetail:function(e){
     var that = this;
@@ -132,8 +133,9 @@ Page({
   },
   //去评价
   goEvaluate:function(e){
+    console.log("evaluate"+JSON.stringify(e));
     var that = this;
-    var orderId = e.currentTarget.orderid;
+    var orderId = e.currentTarget.id;
 
     wx.navigateTo({
       url: '../evaluate/evaluate?orderId='+orderId,

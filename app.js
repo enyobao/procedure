@@ -23,7 +23,6 @@ App({
   },
   globalData:{
     userInfo:null,
-    starNum:0,
     sessionId:""
   },
   //接口公用函数

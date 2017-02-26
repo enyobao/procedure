@@ -28,7 +28,16 @@ Page({
       },
       {
         "name":"评论",
-        "detail":""
+        "detail":[
+          {
+            content:"",
+            createTime:"",
+            photoUrl:"",
+            starLevel:"",
+            userId:"",
+            userName:""
+          }
+        ]
       }
     ],
     imageArr:[],
@@ -92,9 +101,7 @@ Page({
         details[1].detail = data.scheduling;
         details[2].detail = data.expenseExplanation;
         details[3].detail = data.moreIntroduction;
-        if(data.evaluateArr.length > 0){
-          details[4].detail = data.evaluateArr;
-        }
+        details[4].detail = data.evaluateArr;
         that.setData({details:details,imageArr:data.imageArr,header:header});
     }
 

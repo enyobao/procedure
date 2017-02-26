@@ -68,6 +68,25 @@
 .nav-details-show.on{
     display: block;
 }
+.evaluateBox{
+    position: relative;
+    padding: 10px 0 10px 100rpx;
+    width: 600rpx;
+    border-bottom: 1rpx solid #eee;
+}
+.evaluateBox .avatar{
+    position: absolute;
+    left: 10rpx;
+    top: 10rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+.evaluateBox .starLevel{
+    position: absolute;
+    right: 10rpx;
+    top: 18rpx;
+}
 .bottom{
     width: 750rpx;
     height: 100rpx;
