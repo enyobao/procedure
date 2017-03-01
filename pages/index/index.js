@@ -150,7 +150,7 @@ Page({
           var img = data.data.img;
           var hotAreaArr = data.data.hotAreaArr;
           var campTypeArr = data.data.campTypeArr;
-          if(details.length>0){
+          if(details.length>0 && that.data.page > 1){
             list = details.concat(list);
           }
           console.log("list.length:"+list.length);
@@ -166,11 +166,11 @@ Page({
   switchNav:function(e){
     var that = this;
     var current = e.target.dataset.current;
-    if(this.data.currentTab === current){
-      return false;
-    }else{
+    // if(this.data.currentTab === current){
+      // return false;
+    // }else{
       that.setData({currentTab:current,currentShow:current});
-    }
+    // }
 
     if(current == 0){
       var e={detail:{value:[]}};
@@ -237,6 +237,7 @@ Page({
             sessionId:app.globalData.sessionId
           };
     var js1 = JSON.stringify(js);
+    console.log("-----"+js1);
     var aesStr = sha1.sha1(js1+"wangguowei");
     js.aesStr = aesStr;
     //获取活动列表信息
