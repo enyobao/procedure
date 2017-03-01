@@ -5,63 +5,7 @@ Page({
   data:{  
     motto: 'Hello World',
     userInfo: {},
-    details:[
-      {
-        status:1,
-        statusMark:'支付完成',
-        campTitle:"色彩云南 色彩云南 色彩云南 色彩云南",
-        campInfo:{headImg:"../img/car.jpeg"},
-        evaluateStatus:'0',
-        mark:'留言',
-        createTime:'date',
-        mark:[
-          {userName:'anier',phone:'12333445566'},
-          {userName:'anier',phone:'12333445566'},
-          {userName:'anier',phone:'12333445566'}         
-        ],
-        id:'活动ID',
-        orderId:'订单id',
-        amount:"总价格",
-        userId:'用户id'
-      },
-      {
-        status:2,
-        statusMark:'活动进行中',
-        campTitle:"色彩云南 色彩云南 色彩云南 色彩云南",
-        headImg:"../img/car.jpeg",
-        evaluateMark:'评价按钮字样',
-        mark:'留言',
-        createTime:'date',
-        userDetail:[
-          {userName:'anier',phone:'12333445566'},
-          {userName:'anier',phone:'12333445566'},
-          {userName:'anier',phone:'12333445566'}         
-        ],
-        campId:'活动ID',
-        orderId:'订单id',
-        amount:"总价格",
-        userId:'用户id'
-      },
-      {
-        status:3,
-        statusMark:'活动已结束',
-        campTitle:"色彩云南 色彩云南 色彩云南 色彩云南",
-        headImg:"../img/car.jpeg",
-        evaluateMark:'评价按钮字样',
-        mark:'留言',
-        createTime:'date',
-        userDetail:[
-          {userName:'anier',phone:'12333445566'},
-          {userName:'anier',phone:'12333445566'},
-          {userName:'anier',phone:'12333445566'}         
-        ],
-        campId:'活动ID',
-        orderId:'订单id',
-        amount:"总价格",
-        userId:'用户id'
-      }
-
-    ],
+    details:[],
     currentIndex:0,
     down:[
       {down:false},

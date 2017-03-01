@@ -53,32 +53,16 @@ Page({
     }
     var f2 = JSON.stringify(formArr);
     console.log("formArr.string"+f2);
-    var js = {
-        campId:"'"+ that.data.campId+"'",
-        userList: "'"+f2+"'",
-        num:"'" +that.data.num+"'",
+    var userData = {
+        campId:that.data.campId+"",
+        userList: f2+"",
+        num:that.data.num+"",
         sessionId: app.globalData.sessionId
     };
-    var js1 = JSON.stringify(js);
-    var aesStr = sha1.sha1(js1+"wangguowei");
-    var userData={
-        campId: "'"+that.data.campId+"'",
-        userList:  "'"+f2+"'",
-        num: "'" +that.data.num+"'",
-        sessionId: app.globalData.sessionId,
-        aesStr: aesStr
-    }
+    var userData1 = JSON.stringify(userData);
+    var aesStr = sha1.sha1(userData1+"wangguowei");
+    userData.aesStr = aesStr;
     app.getAPI('order/add',userData,that.addOrder);
-    //模态弹窗
-    // wx.showModal({
-    //   title: '提示',
-    //   content: '这是一个模态弹窗',
-    //   success: function(res) {
-    //     if (res.confirm) {
-    //       console.log('用户点击确定')
-    //     }
-    //   }
-    // });
     //显示操作菜单
     // wx.showActionSheet({
     //   itemList: ['A', 'B', 'C'],
@@ -94,6 +78,30 @@ Page({
   //创建订单回调函数
   addOrder:function(res){
     console.log("addOrder"+JSON.stringify(res));
+    if(res.data.code == 200){
+      //模态弹窗
+      wx.showModal({
+        title: '提示',
+        content: '报名成功,点击确定返回首页。',
+        success: function(res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+            wx.navigateBack({
+              delta: 2, // 回退前 delta(默认为1) 页面
+              success: function(res){
+                // success
+              },
+              fail: function() {
+                // fail
+              },
+              complete: function() {
+                // complete
+              }
+            })
+          }
+        }
+      });
+    }
     //此处调用微信支付接口
   },
   reduceUserFun:function(){
