@@ -16,13 +16,17 @@ Page({
     currentTab: 0,
     currentShow:0,
     scroll:0,
+    scrollTop:0,
+    backTop:false,
     currentSelectedCity:0,
     checkBoxDetails:"",
     checkBoxChecked:false,
     locationName:"",
     campType:"",
     keyword:"",
-    page:1
+    page:1,
+    hidden:false,
+    hasMore:true
   },
   //下拉刷新
   onPullDownRefresh: function(){
@@ -143,18 +147,24 @@ Page({
       var that = this;
       var data = res.data;
       var page = that.data.page;
-      page++;
       if(data.code == 200){//正确数据
           var list = data.data.list; 
           var details = that.data.details;
           var img = data.data.img;
           var hotAreaArr = data.data.hotAreaArr;
           var campTypeArr = data.data.campTypeArr;
+          if(list.length == 0){
+              that.setData({hasMore:false});
+              if(details.length>0 && page!=1){
+                  return;
+              }
+          }
           if(details.length>0 && that.data.page > 1){
             list = details.concat(list);
           }
           console.log("list.length:"+list.length);
-          that.setData({details:list,imgUrls:img,hotArea:hotAreaArr,campTypeArr:campTypeArr,page:page});
+          page++;
+          that.setData({details:list,imgUrls:img,hotArea:hotAreaArr,campTypeArr:campTypeArr,page:page,hidden:true,keyword:""});
       }
   },
   //滑动tab 切换
@@ -166,17 +176,24 @@ Page({
   switchNav:function(e){
     var that = this;
     var current = e.target.dataset.current;
-    // if(this.data.currentTab === current){
-      // return false;
-    // }else{
-      that.setData({currentTab:current,currentShow:current});
-    // }
-
     if(current == 0){
-      var e={detail:{value:[]}};
-      that.checkBoxChange(e);
-      that.cityReset();
+        var js = {
+            locationName:"",
+            campType:"",
+            keyword:"",
+            page:"1",
+            sessionId:app.globalData.sessionId
+          };
+        var js1 = JSON.stringify(js);
+        var aesStr = sha1.sha1(js1+"wangguowei");
+        js.aesStr = aesStr;
+        //获取活动列表信息
+        app.getAPI('campaign/list',js,that.getList);
+        that.setData({currentTab:current,currentShow:current,page:1});
+        that.cityReset();
+        return;
     }
+    that.setData({currentTab:current,currentShow:current,page:1});
   },
   //跳转到详情页
   getDetails:function(event){
@@ -199,9 +216,9 @@ Page({
     var that = this;
     var scrollTop = event.detail.scrollTop;
     if(scrollTop > 10){
-      that.setData({scroll:1});
+      that.setData({scroll:1,backTop:true});
     }else{
-      that.setData({scroll:0});
+      that.setData({scroll:0,backTop:false});
     }
   },
   //热门城市，种类-复选框
@@ -219,15 +236,12 @@ Page({
       that.setData({campType:num});
         break;
     }
-    console.log("种类"+num);
   },
   //确认筛选
   citySelected:function(event){
-    console.log("checked:"+JSON.stringify(event));
     var that =this;
     var checkedData = that.data.checkBoxDetails;
-    console.log("筛选"+checkedData);
-    that.setData({currentShow:0,page:1});
+    that.setData({currentShow:0,page:1,keyword:""});
 
     var js = {
             locationName:that.data.locationName,
@@ -250,10 +264,28 @@ Page({
   },
   //搜索
   searchFun:function(e){
+    var that = this;
+    that.setData({keyword:e.detail.value,page:1});
     console.log("search:"+e.detail.value);
+    var js = {
+            locationName:that.data.locationName,
+            campType:that.data.campType,
+            keyword:that.data.keyword,
+            page:"1",
+            sessionId:app.globalData.sessionId
+          };
+    var js1 = JSON.stringify(js);
+    console.log("-----"+js1);
+    var aesStr = sha1.sha1(js1+"wangguowei");
+    js.aesStr = aesStr;
+    //获取活动列表信息
+    app.getAPI('campaign/list',js,that.getList);
   },
   searchBtnFun:function(){
     var search_content = document.getElementById('search_value').value; 
     console.log("search:"+search_content);
+  },
+  goTop:function(){
+    this.setData({scrollTop:0});
   }
 })

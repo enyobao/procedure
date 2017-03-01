@@ -3,11 +3,11 @@
 <view class="header clearfix {{scroll == 1?'on':''}}">
     <view class="logo">Logo</view>
     <view class='search-con'>
-        <input class="input" id="search_value" type="text" placeholder="北京" bindconfirm="searchFun"/>
+        <input class="input" id="search_value" type="text" placeholder="北京" bindconfirm="searchFun" value="{{keyword}}"/>
         <icon type="search" class="icon-search" size="20" color="#fff" bindtap="searchBtnFun"></icon>
     </view>  
 </view>
-<scroll-view class="container" scroll-y="true" bindscroll="changeHeader" bindscrolltolower="loadMore">
+<scroll-view class="container" scroll-y="true" scroll-top="{{scrollTop}}" bindscroll="changeHeader" bindscrolltolower="loadMore">
   <view class="slide-con">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
       <block wx:for="{{imgUrls}}" wx:key="property">
@@ -53,6 +53,20 @@
     <block wx:for="{{details}}" wx:key="property">
       <template is="detailsTmp" data="{{item,index}}"/>
     </block>
+    <block wx:if="{{hidden}}">
+        <view wx:if="{{hasMore}}" class="hasMore">
+            <icon type="waiting" size="30" color="green"/><text>玩命的加载中...</text>
+        </view>
+        <view wx:else class="hasMore"><text>没有更多内容了</text></view>
+    </block>
+  </view>
+  <view class="backTop" bindtap="goTop" wx:if="{{backTop}}">
+    <image src="../img/back.png"></image>
   </view>
 </scroll-view>
+<view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+        加载中...
+    </loading>
+</view>
 
