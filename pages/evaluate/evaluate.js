@@ -76,20 +76,35 @@ Page({
   getEvaluateRes:function(res){
     console.log("getEvaluateRes"+JSON.stringify(res));
     if(res.data.code == 200){
-      wx.redirectTo({
-        url: '../user/user',
-        success: function(res){
-          // success
-        },
-        fail: function() {
-          // fail
-        },
-        complete: function() {
-          // complete
+      wx.showModal({
+        title: '提示',
+        content: res.data.info,
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateBack({
+              delta: 1, // 回退前 delta(默认为1) 页面
+              success: function(res){
+                // success
+              },
+              fail: function() {
+                // fail
+              },
+              complete: function() {
+                // complete
+              }
+            });
+          }
         }
-      })
+      });
     }else{
-      console.log("添加失败："+res.data.info);
+      wx.showModal({
+        title: '提示',
+        content: res.data.info,
+        success: function(res) {
+          if (res.confirm) {
+          }
+        }
+      });
     }
   }
 })

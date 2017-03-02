@@ -30,6 +30,21 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh: function(){
+    console.log("刷新");
+    // var that = this;
+    // var js = {
+    //         locationName:that.data.locationName,
+    //         campType:that.data.campType,
+    //         keyword:that.data.keyword,
+    //         page:that.data.page+"",
+    //         sessionId:app.globalData.sessionId
+    //       };
+    // var js1 = JSON.stringify(js);
+    // var aesStr = sha1.sha1(js1+"wangguowei");
+    // js.aesStr=aesStr;
+    // //获取活动列表信息
+    // app.getAPI('campaign/list',js,that.getList);
+
     wx.stopPullDownRefresh();
   },
   onLoad: function () {
@@ -42,7 +57,6 @@ Page({
       that.setData({
         userInfo:userInfo
       });
-      console.log(that.data);
     });
   },
   //登录
@@ -50,8 +64,6 @@ Page({
     var that = this;
     wx.login({
       success: function (res) {
-        console.log("userInfoFun:"+JSON.stringify(res)); 
-    
         var js={code:res.code};
         var js1 = JSON.stringify(js);
         var aesStr = sha1.sha1(js1+"wangguowei");
@@ -74,11 +86,9 @@ Page({
     var aesStr = sha1.sha1(js1+"wangguowei");
     js.aesStr=aesStr;
     //获取活动列表信息
-    console.log("page"+this.data.page);
     app.getAPI('campaign/list',js,that.getList);
   },
   getSettion:function(res){
-    console.log("getSettion"+JSON.stringify(res));
     app.globalData.sessionId = res.data.data;
     var that = this;
     //存储sessionId
@@ -86,16 +96,13 @@ Page({
       key: 'sessionId',
       data: res.data.data,
       success:function(res){
-        console.log("storage"+JSON.stringify(res));
         //获取用户信息
         wx.getUserInfo({
           success: function (res) {
             app.globalData.userInfo = res.userInfo;
             typeof cb == "function" && cb(that.globalData.userInfo);
-            // var userInfo = JSON.stringify(app.globalData.userInfo);
             var userInfo = app.globalData.userInfo;
             var sessionId = app.globalData.sessionId;
-            // console.log("sessionId"+sessionId);
             var regs = {
                   name:app.globalData.userInfo.nickName,
                   photoUrl:app.globalData.userInfo.avatarUrl,
@@ -103,7 +110,6 @@ Page({
                   userInfo:JSON.stringify(userInfo)
                 };
             var regs1 = JSON.stringify(regs);
-            // console.log("regs1"+regs1);
             var aesStr = sha1.sha1(regs1+"wangguowei");
             var data ={
                 name:app.globalData.userInfo.nickName,
@@ -112,7 +118,7 @@ Page({
                 userInfo:JSON.stringify(userInfo),
                 aesStr:aesStr
               };
-            //用户这册请求接口
+            //用户注册请求接口
             app.getAPI('user/register',data,function(res){
               console.log("register"+JSON.stringify(res));
             });
@@ -143,7 +149,6 @@ Page({
   },
   //获取活动列表回答
   getList:function(res) {
-    console.log("getList"+JSON.stringify(res));
       var that = this;
       var data = res.data;
       var page = that.data.page;
@@ -162,7 +167,6 @@ Page({
           if(details.length>0 && that.data.page > 1){
             list = details.concat(list);
           }
-          console.log("list.length:"+list.length);
           page++;
           that.setData({details:list,imgUrls:img,hotArea:hotAreaArr,campTypeArr:campTypeArr,page:page,hidden:true,keyword:""});
       }
@@ -224,7 +228,6 @@ Page({
   //热门城市，种类-复选框
   checkBoxChange:function(e){
     var that = this;
-    // var checkBoxDetails = that.data.checkBoxDetails;
     var checkedTitle = e.currentTarget.id;
     var num = e.detail.value;
 
@@ -251,7 +254,6 @@ Page({
             sessionId:app.globalData.sessionId
           };
     var js1 = JSON.stringify(js);
-    console.log("-----"+js1);
     var aesStr = sha1.sha1(js1+"wangguowei");
     js.aesStr = aesStr;
     //获取活动列表信息
@@ -266,7 +268,6 @@ Page({
   searchFun:function(e){
     var that = this;
     that.setData({keyword:e.detail.value,page:1});
-    console.log("search:"+e.detail.value);
     var js = {
             locationName:that.data.locationName,
             campType:that.data.campType,
@@ -275,16 +276,12 @@ Page({
             sessionId:app.globalData.sessionId
           };
     var js1 = JSON.stringify(js);
-    console.log("-----"+js1);
     var aesStr = sha1.sha1(js1+"wangguowei");
     js.aesStr = aesStr;
     //获取活动列表信息
     app.getAPI('campaign/list',js,that.getList);
   },
-  searchBtnFun:function(){
-    var search_content = document.getElementById('search_value').value; 
-    console.log("search:"+search_content);
-  },
+  //返回顶部
   goTop:function(){
     this.setData({scrollTop:0});
   }

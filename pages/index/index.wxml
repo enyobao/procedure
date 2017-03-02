@@ -4,7 +4,7 @@
     <view class="logo">Logo</view>
     <view class='search-con'>
         <input class="input" id="search_value" type="text" placeholder="北京" bindconfirm="searchFun" value="{{keyword}}"/>
-        <icon type="search" class="icon-search" size="20" color="#fff" bindtap="searchBtnFun"></icon>
+        <icon type="search" class="icon-search" size="20" color="#fff"></icon>
     </view>  
 </view>
 <scroll-view class="container" scroll-y="true" scroll-top="{{scrollTop}}" bindscroll="changeHeader" bindscrolltolower="loadMore">
@@ -12,8 +12,7 @@
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
       <block wx:for="{{imgUrls}}" wx:key="property">
           <swiper-item>
-              <!--<navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>-->
-              <image src="{{item.img}}" class="slide-image" campId="{{item.id}}"></image>
+              <image src="{{item.img}}" class="slide-image" id="{{item.id}}" bindtap="getDetails"></image>
           </swiper-item>
       </block>
     </swiper>

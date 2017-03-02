@@ -37,7 +37,6 @@ Page({
     console.log("checked"+JSON.stringify(event.detail.value));
   },
   formSubmit:function(event){
-    console.log("formSubmit"+JSON.stringify(event.detail.value));
     var that = this;
     var value = event.detail.value;
     var num = that.data.num;
@@ -63,17 +62,6 @@ Page({
     var aesStr = sha1.sha1(userData1+"wangguowei");
     userData.aesStr = aesStr;
     app.getAPI('order/add',userData,that.addOrder);
-    //显示操作菜单
-    // wx.showActionSheet({
-    //   itemList: ['A', 'B', 'C'],
-    //   success: function(res) {
-    //     console.log(res.tapIndex)
-    //   },
-    //   fail: function(res) {
-    //     console.log(res.errMsg)
-    //   }
-    // })
-    console.log(JSON.stringify(formArr));
   },
   //创建订单回调函数
   addOrder:function(res){
@@ -87,7 +75,7 @@ Page({
           if (res.confirm) {
             console.log('用户点击确定');
             wx.navigateBack({
-              delta: 2, // 回退前 delta(默认为1) 页面
+              delta: 1, // 回退前 delta(默认为1) 页面
               success: function(res){
                 // success
               },
