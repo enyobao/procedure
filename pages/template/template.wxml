@@ -97,7 +97,7 @@
 
 <template name="userDetailTmp">
   <view class="clearfix">
-    <view class="username fl">{{item.name}}</view>
+    <view class="username fl">{{item.userName}}</view>
     <view class="phone fl">{{item.phone}}</view>
   </view>
 </template>

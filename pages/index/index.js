@@ -85,6 +85,7 @@ Page({
     var js1 = JSON.stringify(js);
     var aesStr = sha1.sha1(js1+"wangguowei");
     js.aesStr=aesStr;
+    that.setData({hasMore:true});
     //获取活动列表信息
     app.getAPI('campaign/list',js,that.getList);
   },
@@ -163,6 +164,8 @@ Page({
               if(details.length>0 && page!=1){
                   return;
               }
+          }else if(list.length < 10){
+              that.setData({hasMore:false});
           }
           if(details.length>0 && that.data.page > 1){
             list = details.concat(list);
@@ -230,6 +233,9 @@ Page({
     var that = this;
     var checkedTitle = e.currentTarget.id;
     var num = e.detail.value;
+    if(num.length < 1){
+      num = "";
+    }
 
     switch(checkedTitle){
       case 'locationName':
@@ -244,8 +250,19 @@ Page({
   citySelected:function(event){
     var that =this;
     var checkedData = that.data.checkBoxDetails;
-    that.setData({currentShow:0,page:1,keyword:""});
-
+    var locationName = that.data.locationName;
+    var campType = that.data.campType;
+    var currentTab = that.data.currentTab;
+    if(!locationName && !campType){
+        currentTab = 0;
+    }else{
+        if(locationName){
+            currentTab = 1;
+        }else{
+          currentTab = 2;
+        }
+    }
+    that.setData({currentShow:0,currentTab:currentTab,page:1,keyword:""});
     var js = {
             locationName:that.data.locationName,
             campType:that.data.campType,
