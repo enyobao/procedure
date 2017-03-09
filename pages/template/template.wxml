@@ -73,7 +73,8 @@
             </block>
             <block wx:else>
                 <block wx:if="{{item.detail}}">
-                    <textarea value=" {{item.detail}}" disabled="true"/>
+                    <!--<textarea value=" {{item.detail}}" disabled="true" auto-height />-->
+                    <text>{{item.detail}}</text>
                 </block>
                 <block wx:else>
                     暂无

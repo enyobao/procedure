@@ -1,25 +1,22 @@
 <import src="../template/template.wxml"/>
 <view class="container">
-    <scroll-view scroll-y="true" class="wrap" id="{{detailsId}}">
-        <view class="slide-con">
-            <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
-                <block wx:for="{{imageArr}}" wx:key="property">
-                    <swiper-item>
-                        <!--<navigator url="{{item.link}}" hover-class="navigator-hover"></navigator>-->
-                        <image src="{{item}}" class="slide-image"></image>
-                    </swiper-item>
-                </block>
-            </swiper>
-        </view>
-        <view class="header">
-            <template is="headerTmp" data="{{header}}"/>
-        </view> 
-        <view class="nav">
-            <block wx:for="{{details}}" wx:key="property">
-                <template is="detailsConTmp" data="{{item,index,currentId}}"/> 
+    <view class="slide-con">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="duration">
+            <block wx:for="{{imageArr}}" wx:key="property">
+                <swiper-item>
+                    <image src="{{item}}" class="slide-image"></image>
+                </swiper-item>
             </block>
-        </view>
-    </scroll-view>  
+        </swiper>
+    </view>
+    <view class="header">
+        <template is="headerTmp" data="{{header}}"/>
+    </view> 
+    <view class="nav">
+        <block wx:for="{{details}}" wx:key="property">
+            <template is="detailsConTmp" data="{{item,index,currentId}}"/> 
+        </block>
+    </view>
     <view class="bottom">
         <button class="join-in" type="primary" bindtap="joinInEvent">我要报名</button>
     </view> 

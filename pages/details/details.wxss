@@ -5,9 +5,6 @@
     color: #333;
     line-height: 40rpx;
 }
-.wrap{
-    height: 1142rpx;
-}
 .slide-con{
     height: 300rpx;
 }
@@ -19,7 +16,6 @@
     line-height: 50rpx;
     padding: 20rpx 25rpx;
     width: 700rpx;
-    /*height: 150rpx;*/
     background: #fff;
     margin-bottom: 20rpx;
 }
