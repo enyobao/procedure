@@ -10,7 +10,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "我跑我在",
+    "navigationBarTitleText": "iOutDoor+",
     "navigationBarTextStyle":"black",
     "enablePullDownRefresh":"true"
   },

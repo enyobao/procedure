@@ -35,12 +35,12 @@
 }
 .logo{
   width:250rpx;
-  padding-left:20rpx;
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 70rpx;
   float: left;
-  color:#f00;
-  font-weight: bold;
+}
+.logo image{
+  width: 100%;
+  height: 100%;
 }
 .header .search-con{
   position: relative;

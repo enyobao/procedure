@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <import src="../template/template.wxml"/>
 <view class="header clearfix {{scroll == 1?'on':''}}">
-    <view class="logo">Logo</view>
+    <view class="logo"><image src="../img/logo.png"></image></view>
     <view class='search-con'>
         <input class="input" id="search_value" type="text" placeholder="北京" bindconfirm="searchFun" value="{{keyword}}"/>
         <icon type="search" class="icon-search" size="20" color="#fff"></icon>
