@@ -62,7 +62,11 @@ Page({
   getOrderList:function(res){
     console.log("getOrderList:"+JSON.stringify(res.data.data));
     var that = this;
-    that.setData({details:res.data.data});
+    var down = [];
+    for(var i=0 ; i < res.data.data.length ; i++){
+        down.push({down:false});
+    }
+    that.setData({details:res.data.data,down:down});
   },
   showUserDetail:function(e){
     var that = this;
