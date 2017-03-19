@@ -24,7 +24,7 @@
      "pagePath": "pages/index/index",  
      "text": "首页"  
    },{  
-     "selectedIconPath": "pages/img/user-selected1.png",  
+     "selectedIconPath": "pages/img/user-selected.png",  
      "iconPath": "pages/img/user.png",  
      "pagePath": "pages/user/user",  
      "text": "个人中心"  
