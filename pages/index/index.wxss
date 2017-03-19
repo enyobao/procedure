@@ -140,7 +140,8 @@
   display: none;
 }
 .nav .on{
-  color: #00e870;
+  /*color: #00e870;*/
+  color: #390;
 }
 .nav-list-box .on{
   width: 100%;

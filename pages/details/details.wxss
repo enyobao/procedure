@@ -46,6 +46,7 @@
 }
 .nav{
     background: #fff;
+    margin-bottom: 100rpx;
 }
 .nav-show{
     margin: 0 25rpx;

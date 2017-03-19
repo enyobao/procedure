@@ -90,9 +90,11 @@ Page({
     app.getAPI('campaign/list',js,that.getList);
   },
   getSettion:function(res){
+    console.log("------into function getSettion----");
     app.globalData.sessionId = res.data.data;
     var that = this;
     //存储sessionId
+    console.log("---getSetion----");
     wx.setStorage({
       key: 'sessionId',
       data: res.data.data,
