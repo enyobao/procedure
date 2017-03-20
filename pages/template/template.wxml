@@ -104,6 +104,7 @@
 </template>
 
 <template name="evaluateTmp">
-    <view class="imgBox fl {{item.star?'on':''}}"  bindtap="clickStar" id="{{index}}">
-    </view>
+    <!--<view class="imgBox fl {{item.star?'on':''}}"  bindtap="clickStar" id="{{index}}">
+    </view>-->
+    <image src="{{item.starSrc}}" class="imgBox fl"  bindtap="clickStar" id="{{index}}"></image>
 </template>

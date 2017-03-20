@@ -4,11 +4,11 @@ var sha1=require('../../utils/sha1.js');
 Page({
   data:{
     star:[
-      {star:false},
-      {star:false},
-      {star:false},
-      {star:false},
-      {star:false}
+      {star:false,starSrc:"../img/star.png"},
+      {star:false,starSrc:"../img/star.png"},
+      {star:false,starSrc:"../img/star.png"},
+      {star:false,starSrc:"../img/star.png"},
+      {star:false,starSrc:"../img/star.png"}
     ],
     orderId:0,
     starLevel:0
@@ -39,11 +39,13 @@ Page({
     if(star[index].star == true){
       for(var i=4;i>=index;i--){
         star[i].star = false;
+        star[i].starSrc="../img/star.png";
       }
       starLevel = index;
     }else{
       for(var i=0 ;i<=index;i++){
         star[i].star = true;
+        star[i].starSrc="../img/staron.png";
       }
       starLevel = index+1;
     }
@@ -78,7 +80,7 @@ Page({
     if(res.data.code == 200){
       wx.showModal({
         title: '提示',
-        content: res.data.info,
+        content: "评价完成，点击确认返回订单列表。",
         success: function(res) {
           if (res.confirm) {
             wx.navigateBack({

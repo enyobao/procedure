@@ -70,7 +70,7 @@ Page({
       //模态弹窗
       wx.showModal({
         title: '提示',
-        content: '报名成功,点击确定返回首页。',
+        content: '报名成功,点击确定返回详情页。',
         success: function(res) {
           if (res.confirm) {
             console.log('用户点击确定');

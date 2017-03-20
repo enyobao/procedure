@@ -45,6 +45,7 @@ Page({
   },
   onShow:function(){
     // 页面显示
+    this.onLoad();
   },
   onHide:function(){
     // 页面隐藏
@@ -60,7 +61,6 @@ Page({
   },
   //获取个人中心-订单列表回调
   getOrderList:function(res){
-    console.log("getOrderList:"+JSON.stringify(res.data.data));
     var that = this;
     var down = [];
     for(var i=0 ; i < res.data.data.length ; i++){
@@ -81,7 +81,6 @@ Page({
   },
   //去评价
   goEvaluate:function(e){
-    console.log("evaluate"+JSON.stringify(e));
     var that = this;
     var orderId = e.currentTarget.id;
 

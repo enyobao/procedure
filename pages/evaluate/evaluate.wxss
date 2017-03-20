@@ -6,12 +6,10 @@
     color: #333;
 }
 .imgBox{
+    display: block;
     width: 60rpx;
     height: 60rpx;
-    background: url(../img/star.png);
-}
-.imgBox.on{
-    background: url(../img/staron.png);
+    margin-top: -4rpx;
 }
 .text{
     margin-bottom: 20rpx;
