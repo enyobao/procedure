@@ -93,7 +93,7 @@
     </view>
 </template>
 <template name="sex">
-  <radio class="radio" checked="false" value="{{item.value}}">{{item.sex}}</radio>
+  <radio class="radio" value="{{item.value}}">{{item.sex}}</radio>
 </template>
 
 <template name="userDetailTmp">

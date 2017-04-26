@@ -65,9 +65,126 @@ Page({
   },
   //创建订单回调函数
   addOrder:function(res){
-    console.log("addOrder"+JSON.stringify(res));
     if(res.data.code == 200){
+      var orderId = res.data.data;
+      var orderPayData = {
+        orderId: orderId+"",
+        sessionId: app.globalData.sessionId
+      };
+      var userData1 = JSON.stringify(orderPayData);
+      var aesStr = sha1.sha1(userData1+"wangguowei");
+      orderPayData.aesStr = aesStr;
+      app.getAPI('order/pay', orderPayData, function(res){
+        if(res.data.code == 200){
+          var orderSignData = {
+            prepay_id: res.data.data.prepay_id+"",
+            sessionId: app.globalData.sessionId
+          };
+          var userData1 = JSON.stringify(orderSignData);
+          var aesStr = sha1.sha1(userData1+"wangguowei");
+          orderSignData.aesStr = aesStr;
+          app.getAPI('order/sign', orderSignData, function(res){
+            wx.requestPayment({
+              timeStamp: res.data.data.timeStamp+"",
+              nonceStr: res.data.data.nonceStr,
+              package: res.data.data.package,
+              signType: res.data.data.signType,
+              paySign: res.data.data.paySign,
+              success: function(res){
+                var paySuccess = {
+                  orderId: orderId+"",
+                  sessionId: app.globalData.sessionId
+                };
+                var userData1 = JSON.stringify(paySuccess);
+                var aesStr = sha1.sha1(userData1+"wangguowei");
+                paySuccess.aesStr = aesStr;
+                app.getAPI('order/pay-success', paySuccess, function(res){
+                      wx.showModal({
+                          title: '提示',
+                          content: '报名成功,点击确定返回详情页。',
+                          success: function(res) {
+                            if (res.confirm) {
+                              console.log('用户点击确定');
+                              wx.navigateBack({
+                                delta: 1, // 回退前 delta(默认为1) 页面
+                                success: function(res){
+                                  // success
+                                },
+                                fail: function() {
+                                  // fail
+                                },
+                                complete: function() {
+                                  // complete
+                                }
+                              })
+                            }
+                          }
+                        });
+                });
+              },
+              fail: function(res) {
+                var paySuccess = {
+                  orderId: orderId+"",
+                  sessionId: app.globalData.sessionId
+                };
+                var userData1 = JSON.stringify(paySuccess);
+                var aesStr = sha1.sha1(userData1+"wangguowei");
+                paySuccess.aesStr = aesStr;
+                app.getAPI('order/del', paySuccess, function(res){
+                    wx.showModal({
+                          title: '提示',
+                          content: '报名失败',
+                          success: function(res) {
+                            if (res.confirm) {
+                              console.log('用户点击确定');
+                              wx.navigateBack({
+                                delta: 1, // 回退前 delta(默认为1) 页面
+                                success: function(res){
+                                  // success
+                                },
+                                fail: function() {
+                                  // fail
+                                },
+                                complete: function() {
+                                  // complete
+                                }
+                              })
+                            }
+                          }
+                        });
+                });
+              },
+              complete: function(res) {
+                // complete
+              }
+            })
+          });
+        }else{
+           wx.showModal({
+                          title: '提示',
+                          content: '付款失败,点击确定返回详情页。',
+                          success: function(res) {
+                            if (res.confirm) {
+                              console.log('用户点击确定');
+                              wx.navigateBack({
+                                delta: 1, // 回退前 delta(默认为1) 页面
+                                success: function(res){
+                                  // success
+                                },
+                                fail: function() {
+                                  // fail
+                                },
+                                complete: function() {
+                                  // complete
+                                }
+                              })
+                            }
+                          }
+                        });
+        }
+      });
       //模态弹窗
+      /*
       wx.showModal({
         title: '提示',
         content: '报名成功,点击确定返回详情页。',
@@ -89,6 +206,7 @@ Page({
           }
         }
       });
+      */
     }
     //此处调用微信支付接口
   },

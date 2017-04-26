@@ -38,7 +38,7 @@
                         </view>
                         <view class="clearfix">
                             <label class="fl">联系方式：</label>
-                            <input class="text-right fr" name="form[{{index}}].phone" type="number" value="18810112022"/>
+                            <input class="text-right fr" name="form[{{index}}].phone" type="number" value=""/>
                         </view>
                         <view class="clearfix">
                             <label class="fl">性别：</label>
@@ -51,9 +51,7 @@
                         <view class="clearfix">
                             <label class="fl">备注：</label>
                         </view>
-                        <view>
-                            <textarea class="textarea" name="form[{{index}}].mark" placeholder="想对我们说什么，就在这里写下来吧~"/>
-                        </view>
+                        <textarea class="textarea" name="form[{{index}}].mark" placeholder="想对我们说什么，就在这里写下来吧~"/>
                     </view>
                 </block>
             </view>
